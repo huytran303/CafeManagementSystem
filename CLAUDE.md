@@ -15,6 +15,9 @@ Flutter + `flutter_riverpod` (plain providers, no codegen) + `go_router`
 - Only `data/` repositories touch Firebase. Widgets never call `FirebaseFirestore.instance`.
 - Cross-feature access only via providers in `application/`. Never import another feature's `data/` or `presentation/`.
 - Business rules = pure Dart functions in `application/<module>_rules.dart` + a unit test in `test/features/<module>/`.
+- Reference slice to copy: `lib/features/staff/` + `lib/models/shift.dart` + `test/features/staff/`.
+- Riverpod 3: controllers extend `AsyncNotifier<T>`; use `AsyncNotifierProvider.autoDispose<C, T>(C.new)`.
+- Models with timestamps import `cloud_firestore` (with `// ignore: unused_import`) so the generated `.g.dart` compiles.
 
 ## Hard rules
 - Money is `int` VND. Format with `formatVnd()` from `core/utils/format.dart`.

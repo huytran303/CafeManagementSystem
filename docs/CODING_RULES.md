@@ -4,7 +4,7 @@ Read this before writing any code. Every rule here exists so that 5 people can
 work on the same codebase without stepping on each other. When in doubt, copy
 an existing feature that already follows the pattern.
 
-Stack (fixed, do not add alternatives): Flutter + `flutter_riverpod` (state)
+Stack (fixed, do not add alternatives): Flutter + `flutter_riverpod` 3.x (state)
 + `go_router` (navigation) + Firebase (`firebase_auth`, `cloud_firestore`)
 + `freezed` / `json_serializable` (models) + `intl` (formatting).
 
@@ -131,7 +131,10 @@ Rules:
 - `id` is always the Firestore document id. It is **not** stored inside the
   document. Repository adds it when reading (`fromJson({...doc.data()!, 'id': doc.id})`)
   and strips it when writing (`toJson()..remove('id')`).
-- Timestamps: annotate with `@TimestampConverter()` (see `core/utils/timestamp_converter.dart`).
+- Timestamps: annotate with `@TimestampConverter()` (see `core/utils/timestamp_converter.dart`)
+  **and** add `import 'package:cloud_firestore/cloud_firestore.dart';` to the
+  model file with `// ignore: unused_import`. The generated `.g.dart` is a
+  `part` of your file and needs `Timestamp` in scope. See `models/shift.dart`.
 - Enums stored as strings: `@JsonEnum()` + `@JsonValue('preparing')` on each value.
 - After editing a model run:
   `dart run build_runner build --delete-conflicting-outputs`
@@ -241,7 +244,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../models/product.dart';
 import 'menu_providers.dart';
 
-class ProductFormController extends AutoDisposeAsyncNotifier<void> {
+// Riverpod 3: always extend AsyncNotifier; autoDispose is set on the provider.
+class ProductFormController extends AsyncNotifier<void> {
   @override
   Future<void> build() async {}
 
@@ -255,10 +259,13 @@ class ProductFormController extends AutoDisposeAsyncNotifier<void> {
 }
 
 final productFormControllerProvider =
-    AutoDisposeAsyncNotifierProvider<ProductFormController, void>(
+    AsyncNotifierProvider.autoDispose<ProductFormController, void>(
   ProductFormController.new,
 );
 ```
+
+Reference implementation: `features/staff/` (shift check-in/out) is the
+smallest complete slice. Copy its structure for a new feature.
 
 Rules:
 - `ref.watch` in `build()` and in widgets. `ref.read` only inside callbacks
