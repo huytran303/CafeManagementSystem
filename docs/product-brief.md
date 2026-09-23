@@ -102,7 +102,7 @@ A single Flutter mobile app with **role-based access** that digitizes the full o
 |---|---|---|---|---|
 | Authentication & Staff | `AUTH`, `STAFF` | Login, roles, staff CRUD | Shifts, check-in/out | QR/GPS check-in |
 | Menu | `MENU` | Categories, products, sizes, toppings | Images, availability toggle | Combo items |
-| Inventory | `INV` | Ingredients CRUD, manual stock in/out | Recipe-based auto deduction, low-stock alert | Supplier management |
+| Inventory | `INV` | Ingredients CRUD, manual stock in/out | Recipe-based auto deduction, waste on cancel, stocktake, low-stock alert | Supplier management |
 | Point of Sale | `POS` | Table map, create order, cash payment | Discounts, VietQR payment, merge/split table | PDF receipt |
 | Barista Display | `BAR` | Real-time queue, status update | Push notification on "ready" | Prep time stats |
 | Customer Ordering | `CUS` | — | Scan table QR, browse menu, place order | Order tracking |
@@ -150,17 +150,21 @@ stateDiagram-v2
     [*] --> pending
     pending --> preparing: Barista starts
     pending --> cancelled: Cashier/Manager cancels
+    pending --> paid: Takeaway paid upfront
     preparing --> ready: Barista finishes
     preparing --> cancelled: Manager cancels (with reason)
     ready --> served: Cashier serves
+    ready --> cancelled: Manager cancels (with reason)
     served --> paid: Payment confirmed
+    served --> pending: Items added (BR-ORD-04)
+    served --> cancelled: Manager cancels (with reason)
     paid --> [*]
     cancelled --> [*]
 ```
 
 Rules:
 - Items can be added to an order only while status is `pending` or `served` (added items create a new pending batch — see BR-ORD-04).
-- Only Manager can cancel an order in `preparing` state.
+- Only Manager can cancel an order in `preparing`, `ready` or `served` state. The cancel dialog asks whether the drinks were already made (BR-INV-02).
 - `paid` and `cancelled` are terminal; no edits allowed.
 
 ### 4.3 Other flows
@@ -169,6 +173,8 @@ Rules:
 |---|---|
 | Takeaway order | Same as dine-in but `tableId = null`, payment can happen before preparing |
 | Stock in | Manager records received ingredients → stock increases, history logged |
+| Cancel after making | Manager cancels a `preparing`/`ready`/`served` order and ticks "Đã pha" → ingredients deducted by recipe as waste (BR-INV-02) |
+| Stocktake | Manager enters counted stock per ingredient → system logs the difference as an adjustment (BR-INV-03) |
 | Low-stock alert | After deduction, if `stock <= minStock` → push notification to Manager |
 | Shift check-in | Staff taps "Check in" → shift record with timestamp; "Check out" closes it |
 | Loyalty earn | On payment, cashier enters phone → points added (see BR-LOY-01) |
@@ -226,6 +232,8 @@ Format: `FR-<MODULE>-<NN>` · Priority · Actor(s)
 | FR-INV-05 | System auto-deducts ingredients by recipe when an order is paid | P1 | System |
 | FR-INV-06 | System alerts Manager when ingredient stock ≤ min stock | P1 | System |
 | FR-INV-07 | Manager views stock movement history per ingredient | P1 | Manager |
+| FR-INV-08 | When cancelling an order whose drinks were already made, system deducts ingredients by recipe as waste | P1 | Manager, System |
+| FR-INV-09 | Manager performs a stocktake: enters counted quantity, system records the difference as an adjustment | P1 | Manager |
 
 ### 5.5 Point of Sale (`POS`)
 
@@ -390,7 +398,7 @@ Only the core stories are listed; add more per module in the SRS.
 | S07 | My shift (check-in/out) | `/shift` | Cashier, Barista | STAFF |
 | S08 | Category & product list | `/manager/menu` | Manager | MENU |
 | S09 | Product form (sizes, toppings, recipe) | `/manager/menu/:id` | Manager | MENU, INV |
-| S10 | Ingredient list / form | `/manager/inventory` | Manager | INV |
+| S10 | Ingredient list / form / stocktake | `/manager/inventory` | Manager | INV |
 | S11 | Stock movement history | `/manager/inventory/:id` | Manager | INV |
 | S12 | Table management + QR print | `/manager/tables` | Manager | POS, CUS |
 | S13 | Table map | `/pos` | Cashier | POS |
@@ -470,8 +478,8 @@ ingredients/{ingredientId}
 ingredients/{ingredientId}/movements/{movementId}
   type: "in" | "sale" | "adjust"
   qty: number            # positive = in, negative = out
-  orderId: string | null
-  reason: string | null
+  orderId: string | null # set for "sale" and for cancel waste ("adjust")
+  reason: string | null  # required for "adjust": cancel reason, "Kiểm kho", ...
   byUserId: string
   createdAt: timestamp
 
@@ -641,6 +649,12 @@ Rules:
 
 > Stock is allowed to go negative (the drink was already made); negative stock is highlighted for the manager to correct.
 
+**Cancellation transaction (BR-ORD-05, BR-INV-02)** — single `runTransaction`:
+1. Read order (must not be `paid`/`cancelled`); if "Đã pha" is ticked, read ingredients in recipes.
+2. Write: order → `cancelled` with `cancelReason`; table `currentOrderId = null`; if ticked, each ingredient `stock -= qty` and a movement `type = adjust`, `orderId`, `reason = cancelReason`.
+
+**Stocktake (BR-INV-03)** — per ingredient, in a transaction: read `stock`, `diff = counted - stock`; if `diff != 0` set `stock = counted` and log a movement `type = adjust`, `qty = diff`, `reason = "Kiểm kho"`.
+
 **VietQR** — build the image URL with the public VietQR format, no API key needed:
 `https://img.vietqr.io/image/{bankBin}-{accountNo}-compact2.png?amount={total}&addInfo={shortId}&accountName={name}`
 
@@ -658,14 +672,16 @@ Rules:
 | BR-ORD-02 | Order total = subtotal − discount − (pointsRedeemed × vndPerPoint), minimum 0 |
 | BR-ORD-03 | A table can have at most one open order (status not `paid`/`cancelled`) |
 | BR-ORD-04 | Adding items to a `served` order moves it back to `pending` so the barista sees the new items |
-| BR-ORD-05 | Cancellation requires a reason; `preparing` orders can only be cancelled by Manager |
+| BR-ORD-05 | Cancellation requires a reason; `preparing`, `ready` and `served` orders can only be cancelled by Manager |
 | BR-ORD-06 | `shortId` resets daily, format `<letter><4 digits>` |
 | BR-DIS-01 | Only one voucher per order |
 | BR-DIS-02 | Percent voucher discount is capped by `maxDiscount` if set |
 | BR-DIS-03 | Manual discount > 20% of subtotal requires Manager role |
 | BR-LOY-01 | Points earned = floor(total / pointsPerVnd), computed on the amount actually paid |
 | BR-LOY-02 | Redeemed points cannot exceed customer balance or make total negative |
-| BR-INV-01 | Stock deduction happens at payment, not at order creation (cancelled orders do not consume stock) |
+| BR-INV-01 | Stock deduction happens at payment, not at order creation. Cancelled orders do not consume stock unless BR-INV-02 applies |
+| BR-INV-02 | Cancelling an order whose drinks were already made deducts ingredients by recipe as waste (`adjust`, reason = cancel reason). Default: ticked for `ready`/`served`, unticked for `preparing`, not offered for `pending` |
+| BR-INV-03 | Recipe deviations (wrong measure, remakes) are not tracked per drink; they are corrected by stocktake, which logs `counted − system stock` as one adjustment |
 | BR-STAFF-01 | A staff member cannot check in twice without checking out |
 | BR-STAFF-02 | Manager cannot deactivate their own account |
 
@@ -795,7 +811,8 @@ Minimum bar: every business rule in §11 has at least one unit test.
 | POS | Point of Sale — the cashier's ordering and payment screen |
 | VietQR | Vietnamese interbank QR standard (NAPAS) for bank transfers |
 | Recipe | Ingredients and quantities consumed to make one product size |
-| Stock movement | Any change to ingredient stock (in, sale, adjust) |
+| Stock movement | Any change to ingredient stock (in, sale, adjust — adjust covers waste, cancel waste and stocktake) |
+| Stocktake | Physical count of ingredients; the difference from system stock is logged as an adjustment |
 | Short ID | Human-readable order code shown to staff and used in transfer notes |
 | Anonymous auth | Firebase sign-in without credentials, used for customers |
 | Takeaway | Order without a table |
