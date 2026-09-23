@@ -37,7 +37,7 @@
             <mxPoint x="240" y="110" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e16" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Shift history">
+        <mxCell id="e16" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Shift history &amp; cash handover">
           <mxGeometry relative="1" x="-0.491" as="geometry">
             <Array as="points">
               <mxPoint x="222" y="348" />
@@ -128,7 +128,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="v26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" value="Cashier" vertex="1">
-          <mxGeometry height="345" width="200" x="40" y="770" as="geometry" />
+          <mxGeometry height="363" width="200" x="40" y="770" as="geometry" />
         </mxCell>
         <mxCell id="e27" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Login credentials">
           <mxGeometry relative="1" x="-0.364" as="geometry">
@@ -139,7 +139,7 @@
             <mxPoint x="450" y="670" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e28" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Check-in / check-out record">
+        <mxCell id="e28" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Check-in / out, opening &amp; counted cash">
           <mxGeometry relative="1" x="-0.351" as="geometry">
             <Array as="points">
               <mxPoint x="464" y="808" />
@@ -166,7 +166,7 @@
             <mxPoint x="492" y="714" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e31" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Discount / voucher code">
+        <mxCell id="e31" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Voucher code">
           <mxGeometry relative="1" x="-0.342" as="geometry">
             <Array as="points">
               <mxPoint x="506" y="862" />
@@ -193,7 +193,7 @@
             <mxPoint x="534" y="741" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e34" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Cash payment">
+        <mxCell id="e34" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Cash payment (full or split)">
           <mxGeometry relative="1" x="-0.353" as="geometry">
             <Array as="points">
               <mxPoint x="548" y="916" />
@@ -290,6 +290,15 @@
             </Array>
             <mxPoint x="688" y="767" as="sourcePoint" />
             <mxPoint x="240" y="1096" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e44b" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Expected cash &amp; cash difference">
+          <mxGeometry relative="1" x="0.43" as="geometry">
+            <Array as="points">
+              <mxPoint x="702" y="1114" />
+            </Array>
+            <mxPoint x="702" y="765" as="sourcePoint" />
+            <mxPoint x="240" y="1114" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="v45" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" value="Barista" vertex="1">

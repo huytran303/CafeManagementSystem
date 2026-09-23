@@ -40,6 +40,7 @@ rectangle "BrewBoss" {
   rectangle " " <<inner>> {
     usecase "UC04\nManage staff accounts" as UC04
     usecase "UC06\nView shift history" as UC06
+    usecase "UC45\nView shift cash report" as UC45
     usecase "UC07\nManage categories" as UC07
     usecase "UC08\nManage products" as UC08
     usecase "UC14\nDefine recipe" as UC14
@@ -63,6 +64,7 @@ rectangle "BrewBoss" {
 
 MGR -- UC04
 MGR -- UC06
+MGR -- UC45
 MGR -- UC07
 MGR -- UC08
 MGR -- UC14

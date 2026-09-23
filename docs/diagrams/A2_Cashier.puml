@@ -39,6 +39,8 @@ actor "Firebase Cloud Messaging" as FCM <<external>>
 
 rectangle "BrewBoss" {
   rectangle " " <<inner>> {
+    usecase "UC05\nCheck in / out shift\n(see A1)" as UC05
+    usecase "UC44\nHand over cash\n(see A1)" as UC44
     usecase "UC19\nView table map" as UC19
     usecase "UC20\nCreate order" as UC20
     usecase "UC21\nEdit order items" as UC21
@@ -50,10 +52,11 @@ rectangle "BrewBoss" {
       usecase "UC27\nCancel order" as UC27
     }
     usecase "UC25\nTake payment" as UC25
-    usecase "UC24\nApply discount" as UC24
+    usecase "UC24\nApply voucher" as UC24
     usecase "UC38\nAttach loyalty customer" as UC38
     usecase "UC39\nRedeem points" as UC39
     usecase "UC28\nView & share receipt" as UC28
+    usecase "UC46\nSplit payment" as UC46
     usecase "UC10\nBrowse & search menu\n(see A1)" as UC10
     usecase "UC15\nDeduct stock by recipe" as UC15
     usecase "UC16\nSend low-stock alert" as UC16
@@ -61,6 +64,7 @@ rectangle "BrewBoss" {
   }
 }
 
+CAS -- UC05
 CAS -- UC19
 CAS -- UC20
 CAS -- UC21
@@ -78,6 +82,8 @@ UC25 <.. UC24 : <<extend>>
 UC25 <.. UC38 : <<extend>>
 UC25 <.. UC39 : <<extend>>
 UC25 <.. UC28 : <<extend>>
+UC25 <.. UC46 : <<extend>>
+UC05 ..> UC44 : <<include>>
 UC25 ..> UC15 : <<include>>
 UC15 <.. UC16 : <<extend>>
 

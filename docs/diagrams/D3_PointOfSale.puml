@@ -32,7 +32,7 @@ skinparam rectangle<<inner>> {
 }
 hide <<inner>> stereotype
 
-title D3 - Point of Sale (UC18-UC29)
+title D3 - Point of Sale (UC18-UC29, UC46)
 
 actor "Cashier" as CAS
 actor "Manager" as MGR
@@ -51,11 +51,12 @@ rectangle "BrewBoss" {
       usecase "UC27\nCancel order" as UC27
     }
     together {
-      usecase "UC24\nApply discount" as UC24
+      usecase "UC24\nApply voucher" as UC24
       usecase "UC25\nTake payment" as UC25
       usecase "UC28\nView & share receipt" as UC28
     }
     usecase "UC29\nConfigure shop settings" as UC29
+    usecase "UC46\nSplit payment" as UC46
     usecase "UC10\nBrowse & search menu\n(see D2)" as UC10
   }
 }
@@ -77,6 +78,7 @@ MGR -- UC29
 UC20 ..> UC10 : <<include>>
 UC24 .[norank].> UC25 : <<extend>>
 UC28 .[norank].> UC25 : <<extend>>
+UC25 <.. UC46 : <<extend>>
 UC27 .[norank].> UC22 : <<extend>>
 UC25 -- VQR
 

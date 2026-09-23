@@ -50,6 +50,7 @@ rectangle "BrewBoss" {
     usecase "UC03\nReset password" as UC03
     usecase "UC05\nCheck in / out shift" as UC05
     usecase "UC10\nBrowse & search menu" as UC10
+    usecase "UC44\nHand over cash" as UC44
   }
 }
 
@@ -58,6 +59,8 @@ STAFF -- UC02
 STAFF -- UC03
 STAFF -- UC05
 STAFF -- UC10
+
+UC05 ..> UC44 : <<include>>
 
 UC01 -- FAUTH
 UC03 -- FAUTH

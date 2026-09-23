@@ -32,7 +32,7 @@ skinparam rectangle<<inner>> {
 }
 hide <<inner>> stereotype
 
-title D1 - Authentication & Staff (UC01-UC06)
+title D1 - Authentication & Staff (UC01-UC06, UC44-UC45)
 
 actor "Staff" as STAFF
 actor "Cashier" as CAS
@@ -52,6 +52,8 @@ rectangle "BrewBoss" {
     usecase "UC04\nManage staff accounts" as UC04
     usecase "UC05\nCheck in / out shift" as UC05
     usecase "UC06\nView shift history" as UC06
+    usecase "UC44\nHand over cash" as UC44
+    usecase "UC45\nView shift cash report" as UC45
   }
 }
 
@@ -63,6 +65,9 @@ STAFF -- UC05
 STAFF -[hidden]- UC04
 MGR -- UC04
 MGR -- UC06
+MGR -- UC45
+
+UC05 ..> UC44 : <<include>>
 
 UC01 -- FAUTH
 UC03 -- FAUTH

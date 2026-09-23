@@ -100,10 +100,10 @@ A single Flutter mobile app with **role-based access** that digitizes the full o
 
 | Module | Code | P0 | P1 | P2 |
 |---|---|---|---|---|
-| Authentication & Staff | `AUTH`, `STAFF` | Login, roles, staff CRUD | Shifts, check-in/out | QR/GPS check-in |
+| Authentication & Staff | `AUTH`, `STAFF` | Login, roles, staff CRUD | Shifts, check-in/out, cash handover | QR/GPS check-in |
 | Menu | `MENU` | Categories, products, sizes, toppings | Images, availability toggle | Combo items |
 | Inventory | `INV` | Ingredients CRUD, manual stock in/out | Recipe-based auto deduction, waste on cancel, stocktake, low-stock alert | Supplier management |
-| Point of Sale | `POS` | Table map, create order, cash payment | Discounts, VietQR payment, merge/split table | PDF receipt |
+| Point of Sale | `POS` | Table map, create order, cash payment | Vouchers, VietQR payment, split cash + VietQR payment, merge/split table | PDF receipt |
 | Barista Display | `BAR` | Real-time queue, status update | Push notification on "ready" | Prep time stats |
 | Customer Ordering | `CUS` | — | Scan table QR, browse menu, place order | Order tracking |
 | Reports | `RPT` | Daily revenue, order list | Charts, best sellers, date range | Export PDF/Excel |
@@ -138,8 +138,8 @@ sequenceDiagram
     APP->>DB: status = ready
     DB-->>CS: Notify ready
     CS->>APP: Mark served
-    CS->>APP: Take payment (cash / VietQR)
-    APP->>DB: status = paid, deduct stock, add loyalty points
+    CS->>APP: Take payment (cash / VietQR / both)
+    APP->>DB: status = paid, cashAmount, qrAmount, paidBy, deduct stock, add loyalty points
     DB-->>APP: Dashboard revenue updated
 ```
 
@@ -150,7 +150,6 @@ stateDiagram-v2
     [*] --> pending
     pending --> preparing: Barista starts
     pending --> cancelled: Cashier/Manager cancels
-    pending --> paid: Takeaway paid upfront
     preparing --> ready: Barista finishes
     preparing --> cancelled: Manager cancels (with reason)
     ready --> served: Cashier serves
@@ -166,17 +165,20 @@ Rules:
 - Items can be added to an order only while status is `pending` or `served` (added items create a new pending batch — see BR-ORD-04).
 - Only Manager can cancel an order in `preparing`, `ready` or `served` state. The cancel dialog asks whether the drinks were already made (BR-INV-02).
 - `paid` and `cancelled` are terminal; no edits allowed.
+- Payment happens only after service (`served → paid`), for dine-in and takeaway alike. There is no pay-first flow (BR-PAY-04).
 
 ### 4.3 Other flows
 
 | Flow | Summary |
 |---|---|
-| Takeaway order | Same as dine-in but `tableId = null`, payment can happen before preparing |
-| Stock in | Manager records received ingredients → stock increases, history logged |
+| Takeaway order | Same as dine-in but `tableId = null`; the cashier marks it served when handed over, then takes payment |
+| Stock in | Manager records received ingredients and their cost → stock increases, history logged with `cost` |
 | Cancel after making | Manager cancels a `preparing`/`ready`/`served` order and ticks "Đã pha" → ingredients deducted by recipe as waste (BR-INV-02) |
 | Stocktake | Manager enters counted stock per ingredient → system logs the difference as an adjustment (BR-INV-03) |
 | Low-stock alert | After deduction, if `stock <= minStock` → push notification to Manager |
-| Shift check-in | Staff taps "Check in" → shift record with timestamp; "Check out" closes it |
+| Shift check-in | Staff taps "Check in" → shift record with timestamp; "Check out" closes it. Cashier also enters opening cash at check-in |
+| Cash handover | At check-out the cashier counts the drawer → system compares it with expected cash and records the difference (BR-STAFF-03..05) |
+| Split payment | One order paid partly in cash and partly by VietQR → both amounts stored on the order (BR-PAY-01) |
 | Loyalty earn | On payment, cashier enters phone → points added (see BR-LOY-01) |
 
 ---
@@ -205,9 +207,11 @@ Format: `FR-<MODULE>-<NN>` · Priority · Actor(s)
 | FR-STAFF-01 | Manager creates staff account (name, email, phone, role) | P0 | Manager |
 | FR-STAFF-02 | Manager edits staff info and role | P0 | Manager |
 | FR-STAFF-03 | Manager deactivates / reactivates staff | P0 | Manager |
-| FR-STAFF-04 | Staff checks in / checks out of a shift | P1 | Cashier, Barista |
+| FR-STAFF-04 | Staff checks in / checks out of a shift | P1 | Cashier, Barista, Manager |
 | FR-STAFF-05 | Manager views shift history and total hours per staff per period | P1 | Manager |
 | FR-STAFF-06 | Check-in requires scanning the shop's QR code | P2 | Cashier, Barista |
+| FR-STAFF-07 | Cashier enters opening cash at check-in and counted cash at check-out; system shows expected cash and the difference | P1 | Cashier, Manager |
+| FR-STAFF-08 | Manager views cash handover per shift (opening, cash sales, VietQR sales, expected, counted, difference) and filters shifts with a difference | P1 | Manager |
 
 ### 5.3 Menu (`MENU`)
 
@@ -244,12 +248,15 @@ Format: `FR-<MODULE>-<NN>` · Priority · Actor(s)
 | FR-POS-03 | Cashier creates order for a table or takeaway | P0 | Cashier |
 | FR-POS-04 | Cashier adds items with size, toppings, quantity, note | P0 | Cashier |
 | FR-POS-05 | Cashier edits / removes items while order is `pending` | P0 | Cashier |
-| FR-POS-06 | Cashier applies discount (percent, fixed amount, or voucher code) | P1 | Cashier |
+| FR-POS-06 | Cashier applies a voucher code; vouchers are the only discount (no manual discount) | P1 | Cashier |
 | FR-POS-07 | Cashier takes cash payment and sees change due | P0 | Cashier |
 | FR-POS-08 | Cashier shows VietQR code with exact amount and order ID in transfer note | P1 | Cashier |
 | FR-POS-09 | Cashier moves an order to another table / merges two tables | P1 | Cashier |
 | FR-POS-10 | Cashier views and shares receipt (PDF) | P2 | Cashier |
 | FR-POS-11 | Cashier cancels a `pending` order with reason | P0 | Cashier |
+| FR-POS-12 | Cashier marks a `ready` order as `served` (takeaway: when handed to the customer) | P0 | Cashier |
+| FR-POS-13 | Manager edits shop settings (name, address, VietQR bank account, loyalty rates, late-order minutes) | P0 | Manager |
+| FR-POS-14 | Cashier splits one payment between cash and VietQR (VietQR shows only the transfer part) | P1 | Cashier |
 
 ### 5.6 Barista Display (`BAR`)
 
@@ -282,7 +289,7 @@ Format: `FR-<MODULE>-<NN>` · Priority · Actor(s)
 | FR-RPT-02 | Manager views order list filterable by date, status, cashier | P0 | Manager |
 | FR-RPT-03 | Manager views revenue chart by day / week / month | P1 | Manager |
 | FR-RPT-04 | Manager views top N best-selling products | P1 | Manager |
-| FR-RPT-05 | Manager views revenue split by payment method | P1 | Manager |
+| FR-RPT-05 | Manager views revenue split by payment method (sum of `cashAmount` vs `qrAmount`) | P1 | Manager |
 | FR-RPT-06 | Manager exports report to PDF or Excel | P2 | Manager |
 
 ### 5.9 Loyalty (`LOY`)
@@ -316,7 +323,7 @@ Format: `FR-<MODULE>-<NN>` · Priority · Actor(s)
 | NFR-REL-02 | Reliability | Firestore offline cache enabled so brief network drops do not lose in-progress orders |
 | NFR-MAINT-01 | Maintainability | Feature-first folder structure; each feature independently testable |
 | NFR-MAINT-02 | Maintainability | `flutter analyze` passes with zero warnings on `main` |
-| NFR-AUD-01 | Auditability | Cancellations, discounts, and stock adjustments record who and when |
+| NFR-AUD-01 | Auditability | Cancellations, vouchers, payments, stock adjustments and cash handovers record who and when |
 
 ---
 
@@ -352,7 +359,10 @@ Only the core stories are listed; add more per module in the SRS.
 - **When** I choose "Bank transfer" on an order totaling 95.000 ₫
   **Then** a VietQR image is shown with amount 95000 and note containing the order short ID.
 - **When** I tap "Confirm received"
-  **Then** the order becomes `paid` with `paymentMethod = vietqr`.
+  **Then** the order becomes `paid` with `qrAmount = 95000`, `cashAmount = 0`, `paidBy` = my uid.
+- **Given** the customer transfers 50.000 ₫ and pays the rest in cash
+  **When** I enter 50.000 ₫ as the transfer part
+  **Then** the VietQR shows amount 50000, and after confirming, the order has `qrAmount = 50000`, `cashAmount = 45000`.
 
 > Automatic bank confirmation (webhook from a payment gateway) is out of scope; cashier confirms manually.
 
@@ -381,6 +391,18 @@ Only the core stories are listed; add more per module in the SRS.
 - **When** I open the dashboard
   **Then** I see today's revenue (sum of `paid` orders), order count, and average order value, updating live when new payments occur.
 
+### US-07 — Cashier hands over cash at end of shift (FR-STAFF-07, FR-STAFF-08)
+
+> As a **manager**, I want each cashier to reconcile the drawer at check-out so that missing cash is traced to a shift.
+
+- **Given** I checked in with opening cash 500.000 ₫ and took 2.350.000 ₫ in cash and 1.870.000 ₫ by VietQR during my shift
+  **When** I tap "Check out"
+  **Then** the app shows expected cash 2.850.000 ₫ (VietQR shown for reference, not counted) and asks me to enter counted cash.
+- **When** I enter 2.830.000 ₫
+  **Then** the app shows a difference of −20.000 ₫ and requires a note before checking out.
+- **When** the manager opens shift history
+  **Then** my shift shows opening, cash sales, VietQR sales, expected, counted and −20.000 ₫ with my note.
+
 ---
 
 ## 8. Screen Inventory
@@ -394,8 +416,8 @@ Only the core stories are listed; add more per module in the SRS.
 | S03 | Forgot password | `/forgot-password` | All staff | AUTH |
 | S04 | Manager home / dashboard | `/manager` | Manager | RPT |
 | S05 | Staff list / detail / form | `/manager/staff` | Manager | STAFF |
-| S06 | Shift history | `/manager/shifts` | Manager | STAFF |
-| S07 | My shift (check-in/out) | `/shift` | Cashier, Barista | STAFF |
+| S06 | Shift history + cash handover | `/manager/shifts` | Manager | STAFF |
+| S07 | My shift (check-in/out, cash handover) | `/shift` | Cashier, Barista, Manager | STAFF |
 | S08 | Category & product list | `/manager/menu` | Manager | MENU |
 | S09 | Product form (sizes, toppings, recipe) | `/manager/menu/:id` | Manager | MENU, INV |
 | S10 | Ingredient list / form / stocktake | `/manager/inventory` | Manager | INV |
@@ -410,7 +432,7 @@ Only the core stories are listed; add more per module in the SRS.
 | S19 | Reports (charts, best sellers) | `/manager/reports` | Manager | RPT |
 | S20 | Order history | `/manager/orders` | Manager | RPT |
 | S21 | Customers & vouchers | `/manager/loyalty` | Manager | LOY |
-| S22 | Profile / settings | `/profile` | All staff | AUTH |
+| S22 | Profile / settings (shop settings section: Manager only, FR-POS-13) | `/profile` | All staff | AUTH, POS |
 
 ---
 
@@ -424,6 +446,7 @@ Only the core stories are listed; add more per module in the SRS.
 erDiagram
     USER ||--o{ SHIFT : works
     USER ||--o{ ORDER : creates
+    USER ||--o{ ORDER : "takes payment for"
     CATEGORY ||--o{ PRODUCT : contains
     PRODUCT ||--o{ RECIPE_ITEM : "uses (per size)"
     INGREDIENT ||--o{ RECIPE_ITEM : "is used in"
@@ -453,6 +476,11 @@ shifts/{shiftId}
   userId: string
   checkIn: timestamp
   checkOut: timestamp | null
+  openingCash: int | null    # cashier/manager only; null for barista
+  closingCash: int | null    # counted at check-out
+  expectedCash: int | null   # snapshot at check-out (BR-STAFF-04)
+  cashDiff: int | null       # closingCash - expectedCash
+  handoverNote: string | null # required when cashDiff != 0
 
 categories/{categoryId}
   name: string
@@ -479,6 +507,7 @@ ingredients/{ingredientId}/movements/{movementId}
   type: "in" | "sale" | "adjust"
   qty: number            # positive = in, negative = out
   orderId: string | null # set for "sale" and for cancel waste ("adjust")
+  cost: int | null       # total purchase cost in VND, set for "in" (FR-INV-02)
   reason: string | null  # required for "adjust": cancel reason, "Kiểm kho", ...
   byUserId: string
   createdAt: timestamp
@@ -504,14 +533,19 @@ orders/{orderId}
     note: string
   }]
   subtotal: int
-  discount: int
+  discount: int          # voucher discount only (BR-DIS-03)
   voucherCode: string | null
   pointsRedeemed: int
   total: int
-  paymentMethod: "cash" | "vietqr" | null
+  cashAmount: int        # cash kept, change excluded; 0 until paid
+  qrAmount: int          # VietQR transfer; 0 until paid
+  paidBy: string | null  # uid who confirmed payment
   customerId: string | null
   createdBy: string      # uid, or "anonymous"
   cancelReason: string | null
+  cancelledBy: string | null   # uid who cancelled (NFR-AUD-01)
+  confirmedBy: string | null   # uid who confirmed a customer order (FR-CUS-05)
+  confirmedAt: timestamp | null
   createdAt: timestamp
   updatedAt: timestamp
   paidAt: timestamp | null
@@ -548,6 +582,8 @@ settings/shop
 - **Order items are embedded** (not a subcollection): an order is always read and written as a whole, and embedding keeps it to one document read.
 - **Product name/price snapshot** in order items: editing the menu later must not change historical orders.
 - **Daily aggregates** (optional P1): if reading all orders for charts gets slow, add `dailyStats/{yyyy-MM-dd}` updated in the payment transaction.
+- **Two amount fields instead of a payment method**: `cashAmount` + `qrAmount` supports split payments, and every report is a plain sum of each field with no branching on method. Add a `payments: [{method, amount}]` array only if a third method (e-wallet) is added.
+- **Expected cash is a snapshot**: it is computed once at check-out and stored, so the handover record does not change if an order is edited later.
 
 ### 9.4 Required composite indexes
 
@@ -557,6 +593,7 @@ settings/shop
 | orders | `status ASC, paidAt DESC` | Reports |
 | orders | `tableId ASC, status ASC` | Table map |
 | shifts | `userId ASC, checkIn DESC` | Shift history |
+| orders | `paidBy ASC, paidAt ASC` | Expected cash at check-out |
 
 ---
 
@@ -643,20 +680,27 @@ Rules:
 ### 10.4 Key technical flows
 
 **Payment transaction (NFR-REL-01)** — single `runTransaction`:
-1. Read order (must be `served` or takeaway `pending`), ingredients in recipes, customer, voucher.
-2. Validate voucher (active, not expired, `usedCount < usageLimit`, `subtotal >= minOrder`).
-3. Write: order → `paid`; each ingredient `stock -= qty`; movement records; customer `points += earned - redeemed`, `visitCount++`; voucher `usedCount++`; table `currentOrderId = null`.
+1. Read order (must be `served`), ingredients in recipes, customer, voucher; the payer must have an open shift (BR-PAY-03).
+2. Validate voucher (active, not expired, `usedCount < usageLimit`, `subtotal >= minOrder`) and `cashAmount + qrAmount == total` (BR-PAY-01).
+3. Write: order → `paid` with `cashAmount`, `qrAmount`, `paidBy`, `paidAt`; each ingredient `stock -= qty`; movement records; customer `points += earned - redeemed`, `visitCount++`; voucher `usedCount++`; table `currentOrderId = null`.
 
 > Stock is allowed to go negative (the drink was already made); negative stock is highlighted for the manager to correct.
 
 **Cancellation transaction (BR-ORD-05, BR-INV-02)** — single `runTransaction`:
 1. Read order (must not be `paid`/`cancelled`); if "Đã pha" is ticked, read ingredients in recipes.
-2. Write: order → `cancelled` with `cancelReason`; table `currentOrderId = null`; if ticked, each ingredient `stock -= qty` and a movement `type = adjust`, `orderId`, `reason = cancelReason`.
+2. Write: order → `cancelled` with `cancelReason`, `cancelledBy`; table `currentOrderId = null`; if ticked, each ingredient `stock -= qty` and a movement `type = adjust`, `orderId`, `reason = cancelReason`.
+
+**Cash handover (BR-STAFF-03..05)** — at check-out:
+1. Query orders with `paidBy == uid`, `status == paid`, `paidAt` between `checkIn` and now.
+2. `expectedCash = openingCash + sum(cashAmount)`; show `sum(qrAmount)` for reference only.
+3. Cashier enters `closingCash`; `cashDiff = closingCash - expectedCash`; if non-zero, `handoverNote` is required.
+4. Write the shift with `checkOut`, `closingCash`, `expectedCash`, `cashDiff`, `handoverNote`.
 
 **Stocktake (BR-INV-03)** — per ingredient, in a transaction: read `stock`, `diff = counted - stock`; if `diff != 0` set `stock = counted` and log a movement `type = adjust`, `qty = diff`, `reason = "Kiểm kho"`.
 
 **VietQR** — build the image URL with the public VietQR format, no API key needed:
-`https://img.vietqr.io/image/{bankBin}-{accountNo}-compact2.png?amount={total}&addInfo={shortId}&accountName={name}`
+`https://img.vietqr.io/image/{bankBin}-{accountNo}-compact2.png?amount={qrAmount}&addInfo={shortId}&accountName={name}`
+(`qrAmount = total` unless the payment is split.)
 
 **Role guard** — `go_router` `redirect` reads the current user's role from a provider; unauthorized routes redirect to the role's home.
 
@@ -674,9 +718,13 @@ Rules:
 | BR-ORD-04 | Adding items to a `served` order moves it back to `pending` so the barista sees the new items |
 | BR-ORD-05 | Cancellation requires a reason; `preparing`, `ready` and `served` orders can only be cancelled by Manager |
 | BR-ORD-06 | `shortId` resets daily, format `<letter><4 digits>` |
+| BR-PAY-01 | `cashAmount + qrAmount = total`, both ≥ 0. A single-method payment sets the other field to 0 |
+| BR-PAY-02 | `cashAmount` is the cash kept by the shop; change due = cash received − `cashAmount` and is not stored |
+| BR-PAY-03 | Only a user with an open shift can confirm a payment, so every sale belongs to a shift |
+| BR-PAY-04 | An order can be paid only when its status is `served`; takeaway orders are marked served when handed to the customer |
 | BR-DIS-01 | Only one voucher per order |
 | BR-DIS-02 | Percent voucher discount is capped by `maxDiscount` if set |
-| BR-DIS-03 | Manual discount > 20% of subtotal requires Manager role |
+| BR-DIS-03 | There is no manual discount; `discount` comes only from a valid voucher (BR-DIS-01, BR-DIS-02) |
 | BR-LOY-01 | Points earned = floor(total / pointsPerVnd), computed on the amount actually paid |
 | BR-LOY-02 | Redeemed points cannot exceed customer balance or make total negative |
 | BR-INV-01 | Stock deduction happens at payment, not at order creation. Cancelled orders do not consume stock unless BR-INV-02 applies |
@@ -684,6 +732,9 @@ Rules:
 | BR-INV-03 | Recipe deviations (wrong measure, remakes) are not tracked per drink; they are corrected by stocktake, which logs `counted − system stock` as one adjustment |
 | BR-STAFF-01 | A staff member cannot check in twice without checking out |
 | BR-STAFF-02 | Manager cannot deactivate their own account |
+| BR-STAFF-03 | Cashier and Manager must enter `openingCash` (≥ 0) at check-in; Barista shifts have no cash fields |
+| BR-STAFF-04 | `expectedCash = openingCash + sum(cashAmount)` of orders they marked paid during the shift. VietQR is not counted |
+| BR-STAFF-05 | `cashDiff = closingCash − expectedCash`; a non-zero difference requires `handoverNote`. Cash fields cannot be edited after check-out |
 
 ---
 
@@ -696,7 +747,7 @@ Rules:
 | Resource | Manager | Cashier | Barista | Customer (anon) |
 |---|---|---|---|---|
 | users | CRUD | read self | read self | — |
-| shifts | read all | create/update own | create/update own | — |
+| shifts | read all | create/update own (cash fields locked after check-out) | create/update own | — |
 | categories, products | CRUD | read, toggle availability | read | read |
 | ingredients, movements | CRUD | — | — | — |
 | tables | CRUD | read, update `currentOrderId` | read | read one |
@@ -709,7 +760,7 @@ Rules:
 
 - Role stored in `users/{uid}.role`; Security Rules read it with `get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role`.
 - (Optional) Mirror role into Firebase Auth custom claims via Cloud Function to avoid the extra read.
-- Customer ordering uses **anonymous auth**; rules restrict them to creating orders with `source == "customer"` and `status == "pending"`, and prevent them from setting price fields they could tamper with (cashier confirmation, FR-CUS-05, re-validates prices).
+- Customer ordering uses **anonymous auth**; rules restrict them to creating orders with `source == "customer"` and `status == "pending"`, and prevent them from setting price fields or `confirmedBy`/`confirmedAt` they could tamper with (cashier confirmation, FR-CUS-05, re-validates prices).
 - Security Rules must be tested with the Firebase Emulator before the demo.
 
 ---
@@ -744,7 +795,7 @@ Assumed 8 weeks; adjust once the real deadline is known.
 | 2 | **M1 — Foundations** | Login + role routing, menu CRUD, table CRUD, SDS draft |
 | 3 | | Staff CRUD, ingredients, order editor UI, barista queue UI |
 | 4 | **M2 — Core flow** | End-to-end: create order → barista → served → cash payment |
-| 5 | | Recipes + auto deduction, discounts, dashboard basics |
+| 5 | | Recipes + auto deduction, vouchers, dashboard basics |
 | 6 | **M3 — Differentiators** | VietQR, customer QR ordering, push notifications, loyalty, charts |
 | 7 | **M4 — Stabilize** | Security Rules tests, bug fixing, seed data, UI polish |
 | 8 | **M5 — Demo** | Final SRS/SDS, slides, demo video, buffer |
@@ -759,7 +810,7 @@ Weekly: 1 sync meeting + async daily updates. Demo the current `main` build at e
 
 | Level | What | Tool | Owner |
 |---|---|---|---|
-| Unit | Price calculation, discount, points, status transitions (BR-*) | `flutter_test` | Module owner |
+| Unit | Price calculation, discount, points, status transitions, split payment, expected cash (BR-*) | `flutter_test` | Module owner |
 | Repository | Firestore reads/writes | `fake_cloud_firestore` | Module owner |
 | Widget | Key screens render and react to state | `flutter_test` | Module owner |
 | Security Rules | Each role's allowed/denied operations | Firebase Emulator + `@firebase/rules-unit-testing` | M5 |
@@ -814,6 +865,10 @@ Minimum bar: every business rule in §11 has at least one unit test.
 | Stock movement | Any change to ingredient stock (in, sale, adjust — adjust covers waste, cancel waste and stocktake) |
 | Stocktake | Physical count of ingredients; the difference from system stock is logged as an adjustment |
 | Short ID | Human-readable order code shown to staff and used in transfer notes |
+| Opening cash | Cash in the drawer when a cashier checks in |
+| Expected cash | Opening cash plus the cash sales the cashier confirmed during the shift |
+| Cash difference | Counted cash minus expected cash at check-out; negative = shortage |
+| Split payment | One order paid partly in cash and partly by VietQR |
 | Anonymous auth | Firebase sign-in without credentials, used for customers |
 | Takeaway | Order without a table |
 
