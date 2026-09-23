@@ -1,0 +1,53 @@
+@startuml BB_A4_Customer
+left to right direction
+skinparam linetype polyline
+skinparam nodesep 40
+skinparam ranksep 60
+skinparam backgroundColor White
+skinparam shadowing false
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 12
+skinparam ArrowColor Black
+skinparam ArrowFontSize 11
+skinparam actor {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam usecase {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+}
+' inner frame: invisible, only adds padding inside the system boundary
+skinparam rectangle<<inner>> {
+  BorderColor Transparent
+  FontColor Transparent
+}
+hide <<inner>> stereotype
+
+title A4 - Customer
+actor "Customer" as CUS
+actor "Firebase Auth" as FAUTH <<external>>
+
+rectangle "BrewBoss" {
+  rectangle " " <<inner>> {
+    usecase "UC10\nBrowse & search menu" as UC10
+    usecase "UC32\nOrder via table QR" as UC32
+    usecase "UC33\nTrack order status" as UC33
+  }
+}
+
+CUS -- UC10
+CUS -- UC32
+
+UC32 ..> UC10 : <<include>>
+UC32 <.. UC33 : <<extend>>
+UC32 -- FAUTH
+@enduml

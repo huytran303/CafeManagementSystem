@@ -1,0 +1,88 @@
+@startuml BB_A5_Manager
+left to right direction
+skinparam linetype polyline
+skinparam nodesep 40
+skinparam ranksep 60
+skinparam backgroundColor White
+skinparam shadowing false
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 12
+skinparam ArrowColor Black
+skinparam ArrowFontSize 11
+skinparam actor {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam usecase {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+}
+' inner frame: invisible, only adds padding inside the system boundary
+skinparam rectangle<<inner>> {
+  BorderColor Transparent
+  FontColor Transparent
+}
+hide <<inner>> stereotype
+
+title A5 - Manager
+actor "Manager" as MGR
+actor "Firebase Cloud Messaging" as FCM <<external>>
+
+rectangle "BrewBoss" {
+  rectangle " " <<inner>> {
+    usecase "UC04\nManage staff accounts" as UC04
+    usecase "UC06\nView shift history" as UC06
+    usecase "UC07\nManage categories" as UC07
+    usecase "UC08\nManage products" as UC08
+    usecase "UC14\nDefine recipe" as UC14
+    usecase "UC11\nManage ingredients" as UC11
+    usecase "UC12\nRecord stock-in" as UC12
+    usecase "UC13\nRecord stock adjustment" as UC13
+    usecase "UC42\nPerform stocktake" as UC42
+    usecase "UC17\nView stock history" as UC17
+    usecase "UC18\nManage tables & QR" as UC18
+    usecase "UC29\nConfigure shop settings" as UC29
+    usecase "UC34\nView revenue dashboard" as UC34
+    usecase "UC35\nView order history" as UC35
+    usecase "UC36\nView sales reports" as UC36
+    usecase "UC37\nExport report" as UC37
+    usecase "UC40\nManage vouchers" as UC40
+    usecase "UC41\nView loyalty customers" as UC41
+    usecase "UC16\nSend low-stock alert\n(see A2)" as UC16
+    usecase "UC28\nView & share receipt\n(see A2)" as UC28
+  }
+}
+
+MGR -- UC04
+MGR -- UC06
+MGR -- UC07
+MGR -- UC08
+MGR -- UC14
+MGR -- UC11
+MGR -- UC12
+MGR -- UC13
+MGR -- UC42
+MGR -- UC17
+MGR -- UC18
+MGR -- UC29
+MGR -- UC34
+MGR -- UC35
+MGR -- UC36
+MGR -- UC37
+MGR -- UC40
+MGR -- UC41
+
+UC14 .[norank].> UC08 : <<extend>>
+UC37 .[norank].> UC36 : <<extend>>
+UC13 <.. UC16 : <<extend>>
+UC35 <.. UC28 : <<extend>>
+UC16 -- FCM
+@enduml

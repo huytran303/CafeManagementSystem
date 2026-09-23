@@ -1,0 +1,64 @@
+@startuml BB_A1_Staff
+left to right direction
+skinparam linetype polyline
+skinparam nodesep 40
+skinparam ranksep 60
+skinparam backgroundColor White
+skinparam shadowing false
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 12
+skinparam ArrowColor Black
+skinparam ArrowFontSize 11
+skinparam actor {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam usecase {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+}
+' inner frame: invisible, only adds padding inside the system boundary
+skinparam rectangle<<inner>> {
+  BorderColor Transparent
+  FontColor Transparent
+}
+hide <<inner>> stereotype
+
+title A1 - Staff (common to Cashier, Barista, Manager)
+actor "Staff" as STAFF
+actor "Cashier" as CAS
+actor "Barista" as BAR
+actor "Manager" as MGR
+actor "Firebase Auth" as FAUTH <<external>>
+
+CAS --|> STAFF
+BAR --|> STAFF
+MGR --|> STAFF
+
+rectangle "BrewBoss" {
+  rectangle " " <<inner>> {
+    usecase "UC01\nLog in" as UC01
+    usecase "UC02\nLog out" as UC02
+    usecase "UC03\nReset password" as UC03
+    usecase "UC05\nCheck in / out shift" as UC05
+    usecase "UC10\nBrowse & search menu" as UC10
+  }
+}
+
+STAFF -- UC01
+STAFF -- UC02
+STAFF -- UC03
+STAFF -- UC05
+STAFF -- UC10
+
+UC01 -- FAUTH
+UC03 -- FAUTH
+@enduml

@@ -4,7 +4,8 @@ PlantUML sources for the use case model in
 [`../BrewBoss_UseCase_Specifications.docx`](../BrewBoss_UseCase_Specifications.docx) (43 use cases,
 UC01–UC43), derived from [`../product-brief.md`](../product-brief.md).
 
-`use-case-diagrams.drawio` holds the same six diagrams as draw.io pages (D0–D5), open it at
+`use-case-diagrams.drawio` holds the same six diagrams as draw.io pages (D0–D5), and
+`use-case-by-actor.drawio` holds the per-actor diagrams (A1–A5); open them at
 [app.diagrams.net](https://app.diagrams.net).
 
 | File | Scope | Use cases |
@@ -15,6 +16,21 @@ UC01–UC43), derived from [`../product-brief.md`](../product-brief.md).
 | `D3_PointOfSale.puml` | tables, orders, discount, payment, cancel, receipt, shop settings | UC18–UC29 |
 | `D4_BaristaCustomer.puml` | barista queue, ready notification, table-QR ordering | UC30–UC33 |
 | `D5_ReportsLoyalty.puml` | dashboard, order history, reports, loyalty, vouchers | UC34–UC41 |
+
+The same model is also drawn per actor (A1–A5), one diagram per actor showing everything that
+actor starts plus the use cases those reach through `<<include>>` / `<<extend>>`:
+
+| File | Actor | Use cases |
+|---|---|---|
+| `A1_Staff.puml` | Staff (abstract; Cashier, Barista, Manager inherit it) | UC01–UC03, UC05, UC10 |
+| `A2_Cashier.puml` | Cashier | UC09, UC19–UC28, UC38–UC39; reaches UC15, UC16, UC43 |
+| `A3_Barista.puml` | Barista | UC30–UC31 |
+| `A4_Customer.puml` | Customer | UC10, UC32–UC33 |
+| `A5_Manager.puml` | Manager | UC04, UC06–UC08, UC11–UC14, UC17–UC18, UC29, UC34–UC37, UC40–UC42 |
+
+On A2 the payment extensions (UC24, UC28, UC38, UC39) hang off UC25 only, without a direct
+Cashier line, so no dashed arrow crosses an actor association. A5 lists only Manager-only use
+cases; the Cashier and Barista permissions the Manager also holds (brief §2) are on A2 / A3.
 
 Every use case UC01–UC43 is owned by exactly one diagram. A use case shown on another diagram is
 repeated with a `(see Dx)` suffix so the `<<include>>`/`<<extend>>` relationship stays visible
