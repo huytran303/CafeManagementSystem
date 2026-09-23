@@ -1,0 +1,32 @@
+# Lint config. Rules explained in docs/CODING_RULES.md.
+# Run `flutter analyze` before every commit; it must report 0 issues.
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+    - "**/*.freezed.dart"
+    - "**/*.g.dart"
+  errors:
+    # Treat these as errors so they block the PR instead of being ignored.
+    avoid_print: error
+    unused_import: error
+    unused_local_variable: error
+
+linter:
+  rules:
+    prefer_single_quotes: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+    prefer_final_locals: true
+    always_declare_return_types: true
+    avoid_dynamic_calls: true
+    use_build_context_synchronously: true
+    require_trailing_commas: true
+    directives_ordering: true

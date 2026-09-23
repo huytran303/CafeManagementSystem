@@ -1,0 +1,69 @@
+@startuml BB_D5_ReportsLoyalty
+left to right direction
+skinparam linetype polyline
+skinparam nodesep 40
+skinparam ranksep 60
+skinparam backgroundColor White
+skinparam shadowing false
+skinparam defaultFontName Helvetica
+skinparam defaultFontSize 12
+skinparam ArrowColor Black
+skinparam ArrowFontSize 11
+skinparam actor {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam usecase {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+}
+skinparam package {
+  BackgroundColor White
+  BorderColor Black
+}
+' inner frame: invisible, only adds padding inside the system boundary
+skinparam rectangle<<inner>> {
+  BorderColor Transparent
+  FontColor Transparent
+}
+hide <<inner>> stereotype
+
+title D5 - Reports & Loyalty (UC34-UC41)
+
+actor "Cashier" as CAS
+actor "Manager" as MGR
+
+rectangle "BrewBoss" {
+  rectangle " " <<inner>> {
+    usecase "UC34\nView revenue dashboard" as UC34
+    usecase "UC35\nView order history" as UC35
+    usecase "UC36\nView sales reports" as UC36
+    usecase "UC37\nExport report" as UC37
+    usecase "UC38\nAttach loyalty customer" as UC38
+    usecase "UC39\nRedeem points" as UC39
+    usecase "UC40\nManage vouchers" as UC40
+    usecase "UC41\nView loyalty customers" as UC41
+    usecase "UC25\nTake payment\n(see D3)" as UC25
+    usecase "UC28\nView & share receipt\n(see D3)" as UC28
+  }
+}
+
+CAS -- UC38
+CAS -- UC39
+
+MGR -- UC34
+MGR -- UC35
+MGR -- UC36
+MGR -- UC37
+MGR -- UC40
+MGR -- UC41
+
+UC38 ..> UC25 : <<extend>>
+UC39 ..> UC25 : <<extend>>
+UC37 .[norank].> UC36 : <<extend>>
+UC35 <.. UC28 : <<extend>>
+@enduml
