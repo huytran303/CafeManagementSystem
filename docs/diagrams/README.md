@@ -4,6 +4,9 @@ PlantUML sources for the use case model in
 [`../BrewBoss_UseCase_Specifications.docx`](../BrewBoss_UseCase_Specifications.docx) (43 use cases,
 UC01–UC43), derived from [`../product-brief.md`](../product-brief.md).
 
+`use-case-diagrams.drawio` holds the same six diagrams as draw.io pages (D0–D5), open it at
+[app.diagrams.net](https://app.diagrams.net).
+
 | File | Scope | Use cases |
 |---|---|---|
 | `D0_SystemContext.puml` | actors, the 9 modules, the 3 external systems | — |

@@ -1,0 +1,611 @@
+<mxfile host="app.diagrams.net" pages="6">
+  <diagram id="D0" name="D0 System Context">
+    <mxGraphModel grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageWidth="1100" pageHeight="925" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="BrewBoss - System Context" style="text;html=1;align=left;verticalAlign=middle;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" value="BrewBoss" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="320" y="60" width="270" height="805" as="geometry" />
+        </mxCell>
+        <mxCell id="AUTH" value="Authentication" style="shape=folder;tabWidth=70;tabHeight=16;tabPosition=left;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="110" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="STF" value="Staff Management" style="shape=folder;tabWidth=70;tabHeight=16;tabPosition=left;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="195" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MENU" value="Menu" style="shape=folder;tabWidth=70;tabHeight=16;tabPosition=left;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="280" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CORD" value="Customer Ordering" style="shape=folder;tabWidth=70;tabHeight=16;tabPosition=left;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="365" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="POS" value="Point of Sale" style="shape=folder;tabWidth=70;tabHeight=16;tabPosition=left;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="450" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LOY" value="Loyalty" style="shape=folder;tabWidth=70;tabHeight=16;tabPosition=left;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="535" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="BARD" value="Barista Display" style="shape=folder;tabWidth=70;tabHeight=16;tabPosition=left;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="620" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="INV" value="Inventory" style="shape=folder;tabWidth=70;tabHeight=16;tabPosition=left;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="705" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="RPT" value="Reports" style="shape=folder;tabWidth=70;tabHeight=16;tabPosition=left;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="790" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="STAFF" value="Staff" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="190" y="178" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CUS" value="Customer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="190" y="331" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CAS" value="Cashier" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="190" y="501" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="BAR" value="Barista" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="190" y="671" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MGR" value="Manager" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="900" y="450" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FAUTH" value="Firebase Auth" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="900" y="238" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VQR" value="VietQR" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="940" y="578" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FCM" value="Firebase Cloud Messaging" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="900" y="730" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="STAFF" target="AUTH">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="STAFF" target="STF">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="STAFF" target="MENU">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CUS" target="MENU">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CUS" target="CORD">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="POS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="LOY">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="BAR" target="BARD">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="AUTH">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="STF">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="MENU">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="POS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="LOY">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="INV">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="RPT">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="FAUTH" target="AUTH">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="FAUTH" target="CORD">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="VQR" target="POS">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="FCM" target="INV">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="FCM" target="BARD">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="D1" name="D1 Auth &amp; Staff">
+    <mxGraphModel dx="932" dy="816" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="670" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontStyle=1;fontSize=16;" value="D1 - Authentication &amp; Staff (UC01-UC06)" vertex="1">
+          <mxGeometry height="30" width="600" x="40" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;fontStyle=1;fontSize=14;" value="BrewBoss" vertex="1">
+          <mxGeometry height="550" width="270" x="320" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC01" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC01&lt;br&gt;Log in" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="UC02" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC02&lt;br&gt;Log out" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="UC03" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC03&lt;br&gt;Reset password" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="UC05" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC05&lt;br&gt;Check in / out shift" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="UC04" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC04&lt;br&gt;Manage staff accounts" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="UC06" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC06&lt;br&gt;View shift history" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="STAFF" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" value="Staff" vertex="1">
+          <mxGeometry height="60" width="30" x="190" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="CAS" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" value="Cashier" vertex="1">
+          <mxGeometry height="60" width="30" x="50" y="152" as="geometry" />
+        </mxCell>
+        <mxCell id="BAR" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" value="Barista" vertex="1">
+          <mxGeometry height="60" width="30" x="50" y="322" as="geometry" />
+        </mxCell>
+        <mxCell id="MGR" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" value="Manager" vertex="1">
+          <mxGeometry height="60" width="30" x="190" y="492" as="geometry" />
+        </mxCell>
+        <mxCell id="FAUTH" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" value="Firebase Auth" vertex="1">
+          <mxGeometry height="60" width="30" x="900" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="CAS" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;" target="STAFF" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="BAR" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;" target="STAFF" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="MGR" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="205" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="STAFF" style="endArrow=none;html=1;rounded=0;" target="UC01" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="STAFF" style="endArrow=none;html=1;rounded=0;" target="UC02" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="STAFF" style="endArrow=none;html=1;rounded=0;" target="UC03" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="STAFF" style="endArrow=none;html=1;rounded=0;" target="UC05" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="MGR" style="endArrow=none;html=1;rounded=0;" target="UC04" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="MGR" style="endArrow=none;html=1;rounded=0;" target="UC06" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="UC01" style="endArrow=none;html=1;rounded=0;" target="FAUTH" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="UC03" style="endArrow=none;html=1;rounded=0;" target="FAUTH" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="D2" name="D2 Menu &amp; Inventory">
+    <mxGraphModel dx="1218" dy="1068" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1061" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontStyle=1;fontSize=16;" value="D2 - Menu &amp; Inventory (UC07-UC17, UC42-UC43)" vertex="1">
+          <mxGeometry height="30" width="600" x="40" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;fontStyle=1;fontSize=14;" value="BrewBoss" vertex="1">
+          <mxGeometry height="941" width="530" x="320" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC09" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC09&lt;br&gt;Toggle availability" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="UC10" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC10&lt;br&gt;Browse &amp;amp; search menu" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="UC07" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC07&lt;br&gt;Manage categories" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="UC08" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC08&lt;br&gt;Manage products" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="UC14" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC14&lt;br&gt;Define recipe" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="UC11" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC11&lt;br&gt;Manage ingredients" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="UC12" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC12&lt;br&gt;Record stock-in" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="UC13" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC13&lt;br&gt;Record stock adjustment" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="UC17" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC17&lt;br&gt;View stock history" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="UC42" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC42&lt;br&gt;Perform stocktake" vertex="1">
+          <mxGeometry height="60" width="190" x="360" y="875" as="geometry" />
+        </mxCell>
+        <mxCell id="UC27" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC27&lt;br&gt;Cancel order&lt;br&gt;(see D3)" vertex="1">
+          <mxGeometry height="60" width="190" x="620" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="UC43" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC43&lt;br&gt;Deduct cancel waste" vertex="1">
+          <mxGeometry height="60" width="190" x="620" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="UC16" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC16&lt;br&gt;Send low-stock alert" vertex="1">
+          <mxGeometry height="60" width="190" x="620" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="UC15" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC15&lt;br&gt;Deduct stock by recipe" vertex="1">
+          <mxGeometry height="60" width="190" x="620" y="816" as="geometry" />
+        </mxCell>
+        <mxCell id="UC25" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" value="UC25&lt;br&gt;Take payment&lt;br&gt;(see D3)" vertex="1">
+          <mxGeometry height="60" width="190" x="620" y="926" as="geometry" />
+        </mxCell>
+        <mxCell id="CAS" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" value="Cashier" vertex="1">
+          <mxGeometry height="60" width="30" x="190" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="STAFF" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" value="Staff" vertex="1">
+          <mxGeometry height="60" width="30" x="50" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="CUS" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" value="Customer" vertex="1">
+          <mxGeometry height="60" width="30" x="190" y="254" as="geometry" />
+        </mxCell>
+        <mxCell id="MGR" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" value="Manager" vertex="1">
+          <mxGeometry height="60" width="30" x="190" y="578" as="geometry" />
+        </mxCell>
+        <mxCell id="FCM" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" value="Firebase Cloud Messaging" vertex="1">
+          <mxGeometry height="60" width="30" x="900" y="705" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="CAS" style="endArrow=none;html=1;rounded=0;" target="UC09" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="STAFF" style="endArrow=none;html=1;rounded=0;" target="UC10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="CUS" style="endArrow=none;html=1;rounded=0;" target="UC10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="MGR" style="endArrow=none;html=1;rounded=0;" target="UC07" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="MGR" style="endArrow=none;html=1;rounded=0;" target="UC08" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="300" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="MGR" style="endArrow=none;html=1;rounded=0;" target="UC14" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="MGR" style="endArrow=none;html=1;rounded=0;" target="UC11" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="MGR" style="endArrow=none;html=1;rounded=0;" target="UC12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="MGR" style="endArrow=none;html=1;rounded=0;" target="UC13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="MGR" style="endArrow=none;html=1;rounded=0;" target="UC17" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="740" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="MGR" style="endArrow=none;html=1;rounded=0;" target="UC42" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="190" y="800" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="UC14" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" target="UC08" value="«extend»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="UC25" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" target="UC15" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="UC16" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" target="UC15" value="«extend»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="UC16" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" target="UC13" value="«extend»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="UC43" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" target="UC27" value="«extend»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="UC16" style="endArrow=none;html=1;rounded=0;" target="FCM" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="D3" name="D3 Point of Sale">
+    <mxGraphModel grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageWidth="1100" pageHeight="1010" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="D3 - Point of Sale (UC18-UC29)" style="text;html=1;align=left;verticalAlign=middle;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" value="BrewBoss" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="320" y="60" width="530" height="890" as="geometry" />
+        </mxCell>
+        <mxCell id="UC19" value="UC19&lt;br&gt;View table map" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="110" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC20" value="UC20&lt;br&gt;Create order" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="195" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC21" value="UC21&lt;br&gt;Edit order items" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="280" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC23" value="UC23&lt;br&gt;Mark order served" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="365" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC26" value="UC26&lt;br&gt;Move / merge table" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="450" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC22" value="UC22&lt;br&gt;Confirm customer order" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="535" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC27" value="UC27&lt;br&gt;Cancel order" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="620" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC24" value="UC24&lt;br&gt;Apply discount" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="705" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC25" value="UC25&lt;br&gt;Take payment" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="790" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC28" value="UC28&lt;br&gt;View &amp;amp; share receipt" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="875" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC10" value="UC10&lt;br&gt;Browse &amp;amp; search menu&lt;br&gt;(see D2)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="195" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC18" value="UC18&lt;br&gt;Manage tables &amp;amp; QR" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="390" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC29" value="UC29&lt;br&gt;Configure shop settings" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="510" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CAS" value="Cashier" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="190" y="492" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MGR" value="Manager" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="900" y="450" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VQR" value="VietQR" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="900" y="790" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="UC18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="UC29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="«include»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="UC20" target="UC10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="«extend»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="UC24" target="UC25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="«extend»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="UC28" target="UC25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="«extend»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="UC27" target="UC22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="UC25" target="VQR">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="D4" name="D4 Barista &amp; Customer">
+    <mxGraphModel grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageWidth="1100" pageHeight="610" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="D4 - Barista Display &amp; Customer Ordering (UC30-UC33)" style="text;html=1;align=left;verticalAlign=middle;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" value="BrewBoss" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="320" y="60" width="530" height="490.5" as="geometry" />
+        </mxCell>
+        <mxCell id="UC30" value="UC30&lt;br&gt;Process order queue" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="110" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC31" value="UC31&lt;br&gt;Notify order ready" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="195" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC32" value="UC32&lt;br&gt;Order via table QR" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="365" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC10" value="UC10&lt;br&gt;Browse &amp;amp; search menu&lt;br&gt;(see D2)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="476" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC33" value="UC33&lt;br&gt;Track order status" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="280" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="BAR" value="Barista" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="190" y="110" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CUS" value="Customer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="190" y="365" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FCM" value="Firebase Cloud Messaging" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="900" y="195" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FAUTH" value="Firebase Auth" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="900" y="382" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="BAR" target="UC30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CUS" target="UC32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="«extend»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="UC31" target="UC30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="«extend»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="UC33" target="UC32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="«include»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="UC32" target="UC10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="UC31" target="FCM">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="UC32" target="FAUTH">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="D5" name="D5 Reports &amp; Loyalty">
+    <mxGraphModel grid="1" gridSize="10" guides="1" connect="1" arrows="1" page="1" pageWidth="1100" pageHeight="925" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="D5 - Reports &amp; Loyalty (UC34-UC41)" style="text;html=1;align=left;verticalAlign=middle;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" value="BrewBoss" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="320" y="60" width="530" height="805" as="geometry" />
+        </mxCell>
+        <mxCell id="UC38" value="UC38&lt;br&gt;Attach loyalty customer" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="110" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC39" value="UC39&lt;br&gt;Redeem points" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="195" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC25" value="UC25&lt;br&gt;Take payment&lt;br&gt;(see D3)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="152" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC34" value="UC34&lt;br&gt;View revenue dashboard" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="365" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC35" value="UC35&lt;br&gt;View order history" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="450" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC36" value="UC36&lt;br&gt;View sales reports" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="535" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC37" value="UC37&lt;br&gt;Export report" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="620" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC40" value="UC40&lt;br&gt;Manage vouchers" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="705" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC41" value="UC41&lt;br&gt;View loyalty customers" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="360" y="790" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="UC28" value="UC28&lt;br&gt;View &amp;amp; share receipt&lt;br&gt;(see D3)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="450" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CAS" value="Cashier" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="190" y="152" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MGR" value="Manager" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="190" y="578" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="CAS" target="UC39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="UC34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="UC35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="UC36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="UC37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="UC40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="UC41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="«extend»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="UC38" target="UC25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="«extend»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="UC39" target="UC25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="«extend»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="UC37" target="UC36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" value="«extend»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="UC28" target="UC35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
