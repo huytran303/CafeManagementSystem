@@ -1,64 +1,375 @@
-<mxfile host="app.diagrams.net" type="device">
+<mxfile host="app.diagrams.net">
   <diagram id="ctx" name="Context Diagram">
-    <mxGraphModel dx="1300" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="1160" math="0" shadow="0">
+    <mxGraphModel dx="1320" dy="1148" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="1160" math="0" shadow="0">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-                <mxCell id="v11" value="BrewBoss&lt;br&gt;Cafe Shop Management System" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=1;fillColor=#ffffff;fontSize=16;" vertex="1" parent="1"><mxGeometry x="400" y="270" width="500" height="500" as="geometry"/></mxCell>
-        <mxCell id="v12" value="Owner / Manager" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" vertex="1" parent="1"><mxGeometry x="40" y="40" width="260" height="70" as="geometry"/></mxCell>
-        <mxCell id="e13" value="Revenue report" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.408" relative="1" as="geometry"><mxPoint x="543" y="294" as="sourcePoint"/><mxPoint x="276" y="110" as="targetPoint"/><Array as="points"><mxPoint x="276" y="294"/></Array></mxGeometry></mxCell>
-        <mxCell id="e14" value="Best-selling products" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.444" relative="1" as="geometry"><mxPoint x="511" y="312" as="sourcePoint"/><mxPoint x="258" y="110" as="targetPoint"/><Array as="points"><mxPoint x="258" y="312"/></Array></mxGeometry></mxCell>
-        <mxCell id="e15" value="Revenue by payment method" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.470" relative="1" as="geometry"><mxPoint x="488" y="330" as="sourcePoint"/><mxPoint x="240" y="110" as="targetPoint"/><Array as="points"><mxPoint x="240" y="330"/></Array></mxGeometry></mxCell>
-        <mxCell id="e16" value="Shift history" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.491" relative="1" as="geometry"><mxPoint x="469" y="348" as="sourcePoint"/><mxPoint x="222" y="110" as="targetPoint"/><Array as="points"><mxPoint x="222" y="348"/></Array></mxGeometry></mxCell>
-        <mxCell id="e17" value="Stock movement history" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.507" relative="1" as="geometry"><mxPoint x="453" y="366" as="sourcePoint"/><mxPoint x="204" y="110" as="targetPoint"/><Array as="points"><mxPoint x="204" y="366"/></Array></mxGeometry></mxCell>
-        <mxCell id="e18" value="Customer list &amp; points" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.519" relative="1" as="geometry"><mxPoint x="440" y="384" as="sourcePoint"/><mxPoint x="186" y="110" as="targetPoint"/><Array as="points"><mxPoint x="186" y="384"/></Array></mxGeometry></mxCell>
-        <mxCell id="e19" value="Low-stock alert" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.527" relative="1" as="geometry"><mxPoint x="430" y="402" as="sourcePoint"/><mxPoint x="168" y="110" as="targetPoint"/><Array as="points"><mxPoint x="168" y="402"/></Array></mxGeometry></mxCell>
-        <mxCell id="e20" value="Login credentials" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.534" relative="1" as="geometry"><mxPoint x="150" y="110" as="sourcePoint"/><mxPoint x="421" y="420" as="targetPoint"/><Array as="points"><mxPoint x="150" y="420"/></Array></mxGeometry></mxCell>
-        <mxCell id="e21" value="Staff account info" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.538" relative="1" as="geometry"><mxPoint x="132" y="110" as="sourcePoint"/><mxPoint x="414" y="438" as="targetPoint"/><Array as="points"><mxPoint x="132" y="438"/></Array></mxGeometry></mxCell>
-        <mxCell id="e22" value="Category &amp; product setup" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.541" relative="1" as="geometry"><mxPoint x="114" y="110" as="sourcePoint"/><mxPoint x="408" y="456" as="targetPoint"/><Array as="points"><mxPoint x="114" y="456"/></Array></mxGeometry></mxCell>
-        <mxCell id="e23" value="Recipe &amp; ingredient setup" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.542" relative="1" as="geometry"><mxPoint x="96" y="110" as="sourcePoint"/><mxPoint x="404" y="474" as="targetPoint"/><Array as="points"><mxPoint x="96" y="474"/></Array></mxGeometry></mxCell>
-        <mxCell id="e24" value="Stock-in / adjustment" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.541" relative="1" as="geometry"><mxPoint x="78" y="110" as="sourcePoint"/><mxPoint x="402" y="492" as="targetPoint"/><Array as="points"><mxPoint x="78" y="492"/></Array></mxGeometry></mxCell>
-        <mxCell id="e25" value="Table &amp; voucher setup" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.541" relative="1" as="geometry"><mxPoint x="60" y="110" as="sourcePoint"/><mxPoint x="400" y="510" as="targetPoint"/><Array as="points"><mxPoint x="60" y="510"/></Array></mxGeometry></mxCell>
-        <mxCell id="v26" value="Cashier" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" vertex="1" parent="1"><mxGeometry x="40" y="770" width="200" height="345" as="geometry"/></mxCell>
-        <mxCell id="e27" value="Login credentials" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.364" relative="1" as="geometry"><mxPoint x="240" y="790" as="sourcePoint"/><mxPoint x="450" y="670" as="targetPoint"/><Array as="points"><mxPoint x="450" y="790"/></Array></mxGeometry></mxCell>
-        <mxCell id="e28" value="Shift check-in / check-out" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.351" relative="1" as="geometry"><mxPoint x="240" y="808" as="sourcePoint"/><mxPoint x="464" y="687" as="targetPoint"/><Array as="points"><mxPoint x="464" y="808"/></Array></mxGeometry></mxCell>
-        <mxCell id="e29" value="New order (table / takeaway)" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.344" relative="1" as="geometry"><mxPoint x="240" y="826" as="sourcePoint"/><mxPoint x="478" y="701" as="targetPoint"/><Array as="points"><mxPoint x="478" y="826"/></Array></mxGeometry></mxCell>
-        <mxCell id="e30" value="Order items &amp; changes" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.340" relative="1" as="geometry"><mxPoint x="240" y="844" as="sourcePoint"/><mxPoint x="492" y="714" as="targetPoint"/><Array as="points"><mxPoint x="492" y="844"/></Array></mxGeometry></mxCell>
-        <mxCell id="e31" value="Discount / voucher code" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.342" relative="1" as="geometry"><mxPoint x="240" y="862" as="sourcePoint"/><mxPoint x="506" y="724" as="targetPoint"/><Array as="points"><mxPoint x="506" y="862"/></Array></mxGeometry></mxCell>
-        <mxCell id="e32" value="Customer phone number" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.343" relative="1" as="geometry"><mxPoint x="240" y="880" as="sourcePoint"/><mxPoint x="520" y="734" as="targetPoint"/><Array as="points"><mxPoint x="520" y="880"/></Array></mxGeometry></mxCell>
-        <mxCell id="e33" value="Point redemption" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.348" relative="1" as="geometry"><mxPoint x="240" y="898" as="sourcePoint"/><mxPoint x="534" y="741" as="targetPoint"/><Array as="points"><mxPoint x="534" y="898"/></Array></mxGeometry></mxCell>
-        <mxCell id="e34" value="Cash payment" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.353" relative="1" as="geometry"><mxPoint x="240" y="916" as="sourcePoint"/><mxPoint x="548" y="748" as="targetPoint"/><Array as="points"><mxPoint x="548" y="916"/></Array></mxGeometry></mxCell>
-        <mxCell id="e35" value="VietQR payment confirmation" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.359" relative="1" as="geometry"><mxPoint x="240" y="934" as="sourcePoint"/><mxPoint x="562" y="754" as="targetPoint"/><Array as="points"><mxPoint x="562" y="934"/></Array></mxGeometry></mxCell>
-        <mxCell id="e36" value="Table move / merge" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.365" relative="1" as="geometry"><mxPoint x="240" y="952" as="sourcePoint"/><mxPoint x="576" y="759" as="targetPoint"/><Array as="points"><mxPoint x="576" y="952"/></Array></mxGeometry></mxCell>
-        <mxCell id="e37" value="Order cancellation (reason)" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.372" relative="1" as="geometry"><mxPoint x="240" y="970" as="sourcePoint"/><mxPoint x="590" y="763" as="targetPoint"/><Array as="points"><mxPoint x="590" y="970"/></Array></mxGeometry></mxCell>
-        <mxCell id="e38" value="Customer order confirmation" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.379" relative="1" as="geometry"><mxPoint x="240" y="988" as="sourcePoint"/><mxPoint x="604" y="766" as="targetPoint"/><Array as="points"><mxPoint x="604" y="988"/></Array></mxGeometry></mxCell>
-        <mxCell id="e39" value="Table map status" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.386" relative="1" as="geometry"><mxPoint x="618" y="768" as="sourcePoint"/><mxPoint x="240" y="1006" as="targetPoint"/><Array as="points"><mxPoint x="618" y="1006"/></Array></mxGeometry></mxCell>
-        <mxCell id="e40" value="Order total &amp; change due" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.394" relative="1" as="geometry"><mxPoint x="632" y="769" as="sourcePoint"/><mxPoint x="240" y="1024" as="targetPoint"/><Array as="points"><mxPoint x="632" y="1024"/></Array></mxGeometry></mxCell>
-        <mxCell id="e41" value="VietQR payment code" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.401" relative="1" as="geometry"><mxPoint x="646" y="770" as="sourcePoint"/><mxPoint x="240" y="1042" as="targetPoint"/><Array as="points"><mxPoint x="646" y="1042"/></Array></mxGeometry></mxCell>
-        <mxCell id="e42" value="Receipt (PDF)" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.408" relative="1" as="geometry"><mxPoint x="660" y="770" as="sourcePoint"/><mxPoint x="240" y="1060" as="targetPoint"/><Array as="points"><mxPoint x="660" y="1060"/></Array></mxGeometry></mxCell>
-        <mxCell id="e43" value="Order-ready notification" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.416" relative="1" as="geometry"><mxPoint x="674" y="769" as="sourcePoint"/><mxPoint x="240" y="1078" as="targetPoint"/><Array as="points"><mxPoint x="674" y="1078"/></Array></mxGeometry></mxCell>
-        <mxCell id="e44" value="Customer points balance" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.423" relative="1" as="geometry"><mxPoint x="688" y="767" as="sourcePoint"/><mxPoint x="240" y="1096" as="targetPoint"/><Array as="points"><mxPoint x="688" y="1096"/></Array></mxGeometry></mxCell>
-        <mxCell id="v45" value="Barista" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1060" y="40" width="200" height="160" as="geometry"/></mxCell>
-        <mxCell id="e46" value="Real-time order queue" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.374" relative="1" as="geometry"><mxPoint x="700" y="275" as="sourcePoint"/><mxPoint x="1060" y="60" as="targetPoint"/><Array as="points"><mxPoint x="700" y="60"/></Array></mxGeometry></mxCell>
-        <mxCell id="e47" value="Order details (items, notes, elapsed time)" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.366" relative="1" as="geometry"><mxPoint x="714" y="278" as="sourcePoint"/><mxPoint x="1060" y="78" as="targetPoint"/><Array as="points"><mxPoint x="714" y="78"/></Array></mxGeometry></mxCell>
-        <mxCell id="e48" value="New order alert" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.359" relative="1" as="geometry"><mxPoint x="728" y="282" as="sourcePoint"/><mxPoint x="1060" y="96" as="targetPoint"/><Array as="points"><mxPoint x="728" y="96"/></Array></mxGeometry></mxCell>
-        <mxCell id="e49" value="Overdue order warning" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.354" relative="1" as="geometry"><mxPoint x="742" y="288" as="sourcePoint"/><mxPoint x="1060" y="114" as="targetPoint"/><Array as="points"><mxPoint x="742" y="114"/></Array></mxGeometry></mxCell>
-        <mxCell id="e50" value="Login credentials" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.348" relative="1" as="geometry"><mxPoint x="1060" y="132" as="sourcePoint"/><mxPoint x="756" y="294" as="targetPoint"/><Array as="points"><mxPoint x="756" y="132"/></Array></mxGeometry></mxCell>
-        <mxCell id="e51" value="Order status update (preparing / ready)" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.342" relative="1" as="geometry"><mxPoint x="1060" y="150" as="sourcePoint"/><mxPoint x="770" y="301" as="targetPoint"/><Array as="points"><mxPoint x="770" y="150"/></Array></mxGeometry></mxCell>
-        <mxCell id="v52" value="Firebase&lt;br&gt;(Auth, Firestore, FCM)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1060" y="600" width="200" height="80" as="geometry"/></mxCell>
-        <mxCell id="e53" value="Authentication request" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.286" relative="1" as="geometry"><mxPoint x="895" y="470" as="sourcePoint"/><mxPoint x="1220" y="600" as="targetPoint"/><Array as="points"><mxPoint x="1220" y="470"/></Array></mxGeometry></mxCell>
-        <mxCell id="e54" value="Authentication result" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.268" relative="1" as="geometry"><mxPoint x="1204" y="600" as="sourcePoint"/><mxPoint x="898" y="488" as="targetPoint"/><Array as="points"><mxPoint x="1204" y="488"/></Array></mxGeometry></mxCell>
-        <mxCell id="e55" value="Data read / write" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.246" relative="1" as="geometry"><mxPoint x="900" y="506" as="sourcePoint"/><mxPoint x="1188" y="600" as="targetPoint"/><Array as="points"><mxPoint x="1188" y="506"/></Array></mxGeometry></mxCell>
-        <mxCell id="e56" value="Realtime data snapshot" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.218" relative="1" as="geometry"><mxPoint x="1172" y="600" as="sourcePoint"/><mxPoint x="900" y="524" as="targetPoint"/><Array as="points"><mxPoint x="1172" y="524"/></Array></mxGeometry></mxCell>
-        <mxCell id="e57" value="Push notification request" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.184" relative="1" as="geometry"><mxPoint x="899" y="542" as="sourcePoint"/><mxPoint x="1156" y="600" as="targetPoint"/><Array as="points"><mxPoint x="1156" y="542"/></Array></mxGeometry></mxCell>
-        <mxCell id="v58" value="Customer" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1060" y="800" width="200" height="90" as="geometry"/></mxCell>
-        <mxCell id="e59" value="Order status" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.299" relative="1" as="geometry"><mxPoint x="760" y="744" as="sourcePoint"/><mxPoint x="1060" y="872" as="targetPoint"/><Array as="points"><mxPoint x="760" y="872"/></Array></mxGeometry></mxCell>
-        <mxCell id="e60" value="Menu" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.294" relative="1" as="geometry"><mxPoint x="776" y="736" as="sourcePoint"/><mxPoint x="1060" y="854" as="targetPoint"/><Array as="points"><mxPoint x="776" y="854"/></Array></mxGeometry></mxCell>
-        <mxCell id="e61" value="Order request" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.291" relative="1" as="geometry"><mxPoint x="1060" y="836" as="sourcePoint"/><mxPoint x="792" y="726" as="targetPoint"/><Array as="points"><mxPoint x="792" y="836"/></Array></mxGeometry></mxCell>
-        <mxCell id="e62" value="Table QR scan" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.292" relative="1" as="geometry"><mxPoint x="1060" y="818" as="sourcePoint"/><mxPoint x="808" y="714" as="targetPoint"/><Array as="points"><mxPoint x="808" y="818"/></Array></mxGeometry></mxCell>
-        <mxCell id="v63" value="VietQR" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" vertex="1" parent="1"><mxGeometry x="1060" y="980" width="200" height="80" as="geometry"/></mxCell>
-        <mxCell id="e64" value="QR image" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="-0.413" relative="1" as="geometry"><mxPoint x="1060" y="1018" as="sourcePoint"/><mxPoint x="700" y="765" as="targetPoint"/><Array as="points"><mxPoint x="700" y="1018"/></Array></mxGeometry></mxCell>
-        <mxCell id="e65" value="QR request (amount, order id)" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" edge="1" parent="1"><mxGeometry x="0.410" relative="1" as="geometry"><mxPoint x="716" y="761" as="sourcePoint"/><mxPoint x="1060" y="1000" as="targetPoint"/><Array as="points"><mxPoint x="716" y="1000"/></Array></mxGeometry></mxCell>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="v11" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=1;fillColor=#ffffff;fontSize=16;" value="BrewBoss&lt;br&gt;Cafe Shop Management System" vertex="1">
+          <mxGeometry height="500" width="500" x="400" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="v12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" value="Owner / Manager" vertex="1">
+          <mxGeometry height="70" width="260" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Revenue report">
+          <mxGeometry relative="1" x="-0.408" as="geometry">
+            <Array as="points">
+              <mxPoint x="276" y="294" />
+            </Array>
+            <mxPoint x="543" y="294" as="sourcePoint" />
+            <mxPoint x="276" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Best-selling products">
+          <mxGeometry relative="1" x="-0.444" as="geometry">
+            <Array as="points">
+              <mxPoint x="258" y="312" />
+            </Array>
+            <mxPoint x="511" y="312" as="sourcePoint" />
+            <mxPoint x="258" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Revenue by payment method">
+          <mxGeometry relative="1" x="-0.47" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="330" />
+            </Array>
+            <mxPoint x="488" y="330" as="sourcePoint" />
+            <mxPoint x="240" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Shift history">
+          <mxGeometry relative="1" x="-0.491" as="geometry">
+            <Array as="points">
+              <mxPoint x="222" y="348" />
+            </Array>
+            <mxPoint x="469" y="348" as="sourcePoint" />
+            <mxPoint x="222" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Stock movement history">
+          <mxGeometry relative="1" x="-0.507" as="geometry">
+            <Array as="points">
+              <mxPoint x="204" y="366" />
+            </Array>
+            <mxPoint x="453" y="366" as="sourcePoint" />
+            <mxPoint x="204" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Customer list &amp; points">
+          <mxGeometry relative="1" x="-0.519" as="geometry">
+            <Array as="points">
+              <mxPoint x="186" y="384" />
+            </Array>
+            <mxPoint x="440" y="384" as="sourcePoint" />
+            <mxPoint x="186" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Low-stock alert">
+          <mxGeometry relative="1" x="-0.527" as="geometry">
+            <Array as="points">
+              <mxPoint x="168" y="402" />
+            </Array>
+            <mxPoint x="430" y="402" as="sourcePoint" />
+            <mxPoint x="168" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Login credentials">
+          <mxGeometry relative="1" x="0.534" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="420" />
+            </Array>
+            <mxPoint x="150" y="110" as="sourcePoint" />
+            <mxPoint x="421" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Staff account info">
+          <mxGeometry relative="1" x="0.538" as="geometry">
+            <Array as="points">
+              <mxPoint x="132" y="438" />
+            </Array>
+            <mxPoint x="132" y="110" as="sourcePoint" />
+            <mxPoint x="414" y="438" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Category &amp; product setup">
+          <mxGeometry relative="1" x="0.541" as="geometry">
+            <Array as="points">
+              <mxPoint x="114" y="456" />
+            </Array>
+            <mxPoint x="114" y="110" as="sourcePoint" />
+            <mxPoint x="408" y="456" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e23" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Recipe &amp; ingredient setup">
+          <mxGeometry relative="1" x="0.542" as="geometry">
+            <Array as="points">
+              <mxPoint x="96" y="474" />
+            </Array>
+            <mxPoint x="96" y="110" as="sourcePoint" />
+            <mxPoint x="404" y="474" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e24" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Stock-in / adjustment">
+          <mxGeometry relative="1" x="0.541" as="geometry">
+            <Array as="points">
+              <mxPoint x="78" y="492" />
+            </Array>
+            <mxPoint x="78" y="110" as="sourcePoint" />
+            <mxPoint x="402" y="492" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e25" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Table &amp; voucher setup">
+          <mxGeometry relative="1" x="0.541" as="geometry">
+            <Array as="points">
+              <mxPoint x="60" y="510" />
+            </Array>
+            <mxPoint x="60" y="110" as="sourcePoint" />
+            <mxPoint x="400" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" value="Cashier" vertex="1">
+          <mxGeometry height="345" width="200" x="40" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="e27" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Login credentials">
+          <mxGeometry relative="1" x="-0.364" as="geometry">
+            <Array as="points">
+              <mxPoint x="450" y="790" />
+            </Array>
+            <mxPoint x="240" y="790" as="sourcePoint" />
+            <mxPoint x="450" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e28" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Check-in / check-out record">
+          <mxGeometry relative="1" x="-0.351" as="geometry">
+            <Array as="points">
+              <mxPoint x="464" y="808" />
+            </Array>
+            <mxPoint x="240" y="808" as="sourcePoint" />
+            <mxPoint x="464" y="687" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e29" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="New order (table / takeaway)">
+          <mxGeometry relative="1" x="-0.344" as="geometry">
+            <Array as="points">
+              <mxPoint x="478" y="826" />
+            </Array>
+            <mxPoint x="240" y="826" as="sourcePoint" />
+            <mxPoint x="478" y="701" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e30" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Order items &amp; changes">
+          <mxGeometry relative="1" x="-0.34" as="geometry">
+            <Array as="points">
+              <mxPoint x="492" y="844" />
+            </Array>
+            <mxPoint x="240" y="844" as="sourcePoint" />
+            <mxPoint x="492" y="714" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e31" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Discount / voucher code">
+          <mxGeometry relative="1" x="-0.342" as="geometry">
+            <Array as="points">
+              <mxPoint x="506" y="862" />
+            </Array>
+            <mxPoint x="240" y="862" as="sourcePoint" />
+            <mxPoint x="506" y="724" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e32" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Customer phone number">
+          <mxGeometry relative="1" x="-0.343" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="880" />
+            </Array>
+            <mxPoint x="240" y="880" as="sourcePoint" />
+            <mxPoint x="520" y="734" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e33" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Point redemption">
+          <mxGeometry relative="1" x="-0.348" as="geometry">
+            <Array as="points">
+              <mxPoint x="534" y="898" />
+            </Array>
+            <mxPoint x="240" y="898" as="sourcePoint" />
+            <mxPoint x="534" y="741" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e34" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Cash payment">
+          <mxGeometry relative="1" x="-0.353" as="geometry">
+            <Array as="points">
+              <mxPoint x="548" y="916" />
+            </Array>
+            <mxPoint x="240" y="916" as="sourcePoint" />
+            <mxPoint x="548" y="748" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e35" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="VietQR payment confirmation">
+          <mxGeometry relative="1" x="-0.359" as="geometry">
+            <Array as="points">
+              <mxPoint x="562" y="934" />
+            </Array>
+            <mxPoint x="240" y="934" as="sourcePoint" />
+            <mxPoint x="562" y="754" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e36" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Table move / merge">
+          <mxGeometry relative="1" x="-0.365" as="geometry">
+            <Array as="points">
+              <mxPoint x="576" y="952" />
+            </Array>
+            <mxPoint x="240" y="952" as="sourcePoint" />
+            <mxPoint x="576" y="759" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e37" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Order cancellation (reason)">
+          <mxGeometry relative="1" x="-0.372" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="970" />
+            </Array>
+            <mxPoint x="240" y="970" as="sourcePoint" />
+            <mxPoint x="590" y="763" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e38" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Customer order confirmation">
+          <mxGeometry relative="1" x="-0.379" as="geometry">
+            <Array as="points">
+              <mxPoint x="604" y="988" />
+            </Array>
+            <mxPoint x="240" y="988" as="sourcePoint" />
+            <mxPoint x="604" y="766" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e39" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Table map status">
+          <mxGeometry relative="1" x="0.386" as="geometry">
+            <Array as="points">
+              <mxPoint x="618" y="1006" />
+            </Array>
+            <mxPoint x="618" y="768" as="sourcePoint" />
+            <mxPoint x="240" y="1006" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e40" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Order total &amp; change due">
+          <mxGeometry relative="1" x="0.394" as="geometry">
+            <Array as="points">
+              <mxPoint x="632" y="1024" />
+            </Array>
+            <mxPoint x="632" y="769" as="sourcePoint" />
+            <mxPoint x="240" y="1024" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e41" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="VietQR payment code">
+          <mxGeometry relative="1" x="0.401" as="geometry">
+            <Array as="points">
+              <mxPoint x="646" y="1042" />
+            </Array>
+            <mxPoint x="646" y="770" as="sourcePoint" />
+            <mxPoint x="240" y="1042" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e42" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Receipt (PDF)">
+          <mxGeometry relative="1" x="0.408" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="1060" />
+            </Array>
+            <mxPoint x="660" y="770" as="sourcePoint" />
+            <mxPoint x="240" y="1060" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e43" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Order-ready notification">
+          <mxGeometry relative="1" x="0.416" as="geometry">
+            <Array as="points">
+              <mxPoint x="674" y="1078" />
+            </Array>
+            <mxPoint x="674" y="769" as="sourcePoint" />
+            <mxPoint x="240" y="1078" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e44" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Customer points balance">
+          <mxGeometry relative="1" x="0.423" as="geometry">
+            <Array as="points">
+              <mxPoint x="688" y="1096" />
+            </Array>
+            <mxPoint x="688" y="767" as="sourcePoint" />
+            <mxPoint x="240" y="1096" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v45" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" value="Barista" vertex="1">
+          <mxGeometry height="160" width="200" x="1060" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e46" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Real-time order queue">
+          <mxGeometry relative="1" x="0.374" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="60" />
+            </Array>
+            <mxPoint x="700" y="275" as="sourcePoint" />
+            <mxPoint x="1060" y="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e47" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Order details (items, notes, elapsed time)">
+          <mxGeometry relative="1" x="0.366" as="geometry">
+            <Array as="points">
+              <mxPoint x="714" y="78" />
+            </Array>
+            <mxPoint x="714" y="278" as="sourcePoint" />
+            <mxPoint x="1060" y="78" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e48" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="New order alert">
+          <mxGeometry relative="1" x="0.359" as="geometry">
+            <Array as="points">
+              <mxPoint x="728" y="96" />
+            </Array>
+            <mxPoint x="728" y="282" as="sourcePoint" />
+            <mxPoint x="1060" y="96" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e49" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Overdue order warning">
+          <mxGeometry relative="1" x="0.354" as="geometry">
+            <Array as="points">
+              <mxPoint x="742" y="114" />
+            </Array>
+            <mxPoint x="742" y="288" as="sourcePoint" />
+            <mxPoint x="1060" y="114" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e50" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Login credentials">
+          <mxGeometry relative="1" x="-0.348" as="geometry">
+            <Array as="points">
+              <mxPoint x="756" y="132" />
+            </Array>
+            <mxPoint x="1060" y="132" as="sourcePoint" />
+            <mxPoint x="756" y="294" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e51" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Order status update (preparing / ready)">
+          <mxGeometry relative="1" x="-0.342" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="150" />
+            </Array>
+            <mxPoint x="1060" y="150" as="sourcePoint" />
+            <mxPoint x="770" y="301" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v58" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" value="Customer" vertex="1">
+          <mxGeometry height="120" width="200" x="1060" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="e59" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Order status">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="899" y="540" as="sourcePoint" /><mxPoint x="1060" y="540" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="e60" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Menu">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="899" y="500" as="sourcePoint" /><mxPoint x="1060" y="500" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="e61" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Order request">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1060" y="520" as="sourcePoint" /><mxPoint x="900" y="520" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="e62" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Table ID (from QR)">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1060" y="480" as="sourcePoint" /><mxPoint x="897" y="480" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="v63" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1;fontSize=13;" value="VietQR" vertex="1">
+          <mxGeometry height="80" width="200" x="1060" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="e64" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="QR image">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1060" y="710" as="sourcePoint" /><mxPoint x="812" y="710" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="e65" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="QR request (amount, order id)">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="842" y="680" as="sourcePoint" /><mxPoint x="1060" y="680" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="n66" parent="1" style="text;html=1;whiteSpace=wrap;fontSize=10;fontStyle=2;align=left;verticalAlign=top;" value="Auto bank confirmation (webhook) is out of scope.&lt;br&gt;Cashier confirms VietQR payment manually (US-03, A4)." vertex="1">
+          <mxGeometry height="45" width="270" x="1060" y="750" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
