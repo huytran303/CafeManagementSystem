@@ -1,19 +1,19 @@
 # Diagrams
 
 PlantUML sources for the use case model in
-[`../BrewBoss_UseCase_Specifications.docx`](../BrewBoss_UseCase_Specifications.docx) (41 use cases,
-UC01–UC41), derived from [`../product-brief.md`](../product-brief.md).
+[`../BrewBoss_UseCase_Specifications.docx`](../BrewBoss_UseCase_Specifications.docx) (43 use cases,
+UC01–UC43), derived from [`../product-brief.md`](../product-brief.md).
 
 | File | Scope | Use cases |
 |---|---|---|
 | `D0_SystemContext.puml` | actors, the 9 modules, the 3 external systems | — |
 | `D1_AuthStaff.puml` | log in / out, password reset, staff accounts, shifts | UC01–UC06 |
-| `D2_MenuInventory.puml` | categories, products, availability, ingredients, stock, recipes | UC07–UC17 |
+| `D2_MenuInventory.puml` | categories, products, availability, ingredients, stock, recipes, stocktake, cancel waste | UC07–UC17, UC42–UC43 |
 | `D3_PointOfSale.puml` | tables, orders, discount, payment, cancel, receipt, shop settings | UC18–UC29 |
 | `D4_BaristaCustomer.puml` | barista queue, ready notification, table-QR ordering | UC30–UC33 |
 | `D5_ReportsLoyalty.puml` | dashboard, order history, reports, loyalty, vouchers | UC34–UC41 |
 
-Every use case UC01–UC41 is owned by exactly one diagram. A use case shown on another diagram is
+Every use case UC01–UC43 is owned by exactly one diagram. A use case shown on another diagram is
 repeated with a `(see Dx)` suffix so the `<<include>>`/`<<extend>>` relationship stays visible
 without duplicating ownership.
 
@@ -27,7 +27,7 @@ shared include.
   straight line (`skinparam linetype polyline`). No notes on the diagrams.
 - **Short labels.** Each use case shows its id on the first line and a 2–4 word name on the
   second; the full titles are in the specification document.
-- **One diagram per module group.** A single diagram holding all 41 use cases does not fit a page.
+- **One diagram per module group.** A single diagram holding all 43 use cases does not fit a page.
 - **Only three relationship types are drawn:** actor associations, `<<include>>` and
   `<<extend>>`. The order flow (brief §4.1) and the order state machine (brief §4.2) are
   sequence, not use case relationships, and stay in the specifications.
@@ -56,6 +56,7 @@ shared include.
   | UC28 View & share receipt | UC25 Take payment | UC25 step 6: "with a receipt option" |
   | UC28 View & share receipt | UC35 View order history | UC35 alt 3a: paid order → "Hóa đơn" |
   | UC27 Cancel order | UC22 Confirm customer order | UC22 alt 3a: "Cashier rejects the order" |
+  | UC43 Deduct cancel waste | UC27 Cancel order | BR-INV-02: cancelled order whose drinks were already made |
   | UC31 Notify order ready | UC30 Process order queue | UC30 step 5: status = ready |
   | UC33 Track order status | UC32 Order via table QR | UC32 alt 6a: "Order tracking (P2) is built" |
   | UC37 Export report | UC36 View sales reports | UC36 alt 5a: "Manager taps Xuất" |
@@ -65,9 +66,9 @@ shared include.
   is not drawn, so D3 and D5 show only the lowest role that performs each use case.
 - **External actors** are Firebase Auth (UC01, UC03, UC32), Firebase Cloud Messaging (UC16,
   UC31) and VietQR (UC25), drawn to the right of the frame beside the use case that calls them.
-- **System use cases.** UC15, UC16 and UC31 have no human primary actor: UC15 is reached only
-  through `<<include>>` from UC25, and UC16 / UC31 are extensions that talk to Firebase Cloud
-  Messaging.
+- **System use cases.** UC15, UC16, UC31 and UC43 have no human primary actor: UC15 is reached only
+  through `<<include>>` from UC25, UC16 / UC31 are extensions that talk to Firebase Cloud
+  Messaging, and UC43 extends UC27 when the cancelled drinks were already made.
 - **Layout-only constructs** (none carries meaning): the invisible `<<inner>>` rectangle inside
   `BrewBoss` adds padding so no ellipse touches the frame; `.[norank].>` only keeps both ends of an
   `<<extend>>` in the same column; `together { }` on D3 keeps related use cases next to each other.

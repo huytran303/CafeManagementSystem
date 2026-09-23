@@ -109,7 +109,7 @@
             <mxPoint x="404" y="474" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="e24" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Stock-in / adjustment">
+        <mxCell id="e24" edge="1" parent="1" style="rounded=1;arcSize=40;edgeStyle=none;endArrow=classic;endFill=1;html=1;strokeWidth=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;spacingBottom=0;" value="Stock-in / adjustment / stocktake">
           <mxGeometry relative="1" x="0.541" as="geometry">
             <Array as="points">
               <mxPoint x="78" y="492" />

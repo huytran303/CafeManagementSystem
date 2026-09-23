@@ -32,7 +32,7 @@ skinparam rectangle<<inner>> {
 }
 hide <<inner>> stereotype
 
-title D2 - Menu & Inventory (UC07-UC17)
+title D2 - Menu & Inventory (UC07-UC17, UC42-UC43)
 
 actor "Cashier" as CAS
 actor "Customer" as CUS
@@ -53,7 +53,10 @@ rectangle "BrewBoss" {
     usecase "UC15\nDeduct stock by recipe" as UC15
     usecase "UC16\nSend low-stock alert" as UC16
     usecase "UC17\nView stock history" as UC17
+    usecase "UC42\nPerform stocktake" as UC42
+    usecase "UC43\nDeduct cancel waste" as UC43
     usecase "UC25\nTake payment\n(see D3)" as UC25
+    usecase "UC27\nCancel order\n(see D3)" as UC27
   }
 }
 
@@ -68,10 +71,12 @@ MGR -- UC11
 MGR -- UC12
 MGR -- UC14
 MGR -- UC17
+MGR -- UC42
 
 UC14 .[norank].> UC08 : <<extend>>
 UC25 ..> UC15 : <<include>>
 UC15 <.. UC16 : <<extend>>
 UC16 .[norank].> UC13 : <<extend>>
+UC43 .[norank].> UC27 : <<extend>>
 UC16 -- FCM
 @enduml

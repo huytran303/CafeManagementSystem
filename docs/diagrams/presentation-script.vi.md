@@ -65,15 +65,19 @@ và **câu hỏi có thể gặp**.
 > đăng nhập, đăng xuất, đặt lại mật khẩu và check-in/check-out ca. Riêng Quản lý thêm hai chức năng:
 > quản lý tài khoản nhân viên và xem lịch sử ca. Đăng nhập và đặt lại mật khẩu gọi tới Firebase Auth.
 
-### D2 — Menu & Kho (UC07–UC17)
+### D2 — Menu & Kho (UC07–UC17, UC42–UC43)
 
-> Quản lý quản lý danh mục, sản phẩm, nguyên liệu, nhập kho, điều chỉnh kho và xem lịch sử kho.
+> Quản lý quản lý danh mục, sản phẩm, nguyên liệu, nhập kho, điều chỉnh kho, kiểm kho và xem lịch sử kho.
 > "Định nghĩa công thức" là phần mở rộng của "Quản lý sản phẩm". Thu ngân có thể bật/tắt món hết hàng.
 > Cả nhân viên và khách đều duyệt/tìm kiếm menu.
 >
 > Điểm đáng chú ý: "Trừ kho theo công thức" (UC15) không có actor trực tiếp — nó được *include*
 > bởi "Thanh toán" (UC25). Sau khi trừ kho hoặc điều chỉnh kho, nếu tồn kho xuống dưới mức tối thiểu
 > thì *extend* sang "Gửi cảnh báo sắp hết hàng" qua Firebase Cloud Messaging.
+>
+> "Trừ hao hụt khi huỷ" (UC43) *extend* "Huỷ đơn" (UC27): đơn đã pha rồi mới huỷ thì nguyên liệu
+> vẫn bị trừ theo công thức. "Kiểm kho" (UC42) là cách quản lý sửa các sai lệch như pha sai định lượng
+> hay pha lại — nhập số đếm thực tế, hệ thống ghi phần chênh lệch.
 
 ### D3 — Bán hàng (UC18–UC29)
 
@@ -119,10 +123,10 @@ và **câu hỏi có thể gặp**.
 >
 > Hệ thống tạo đơn với trạng thái **pending** và cấp mã ngắn. Đơn của khách được đánh dấu để thu
 > ngân kiểm tra lại giá rồi mới xác nhận. Nếu không xác nhận thì huỷ kèm lý do — đơn chuyển sang
-> **cancelled** và không trừ kho.
+> **cancelled** và không trừ kho, vì chưa pha gì cả.
 >
 > Đơn được xác nhận sẽ vào hàng đợi của pha chế theo thứ tự cũ nhất trước. Pha chế bấm "Bắt đầu" —
-> trạng thái **preparing**. Lúc này chỉ Quản lý mới được huỷ. Pha xong bấm "Xong" — trạng thái
+> trạng thái **preparing**. Từ đây trở đi chỉ Quản lý mới được huỷ. Pha xong bấm "Xong" — trạng thái
 > **ready** — và thu ngân được báo qua push notification, hoặc listener trong app nếu không có
 > Cloud Functions.
 >
@@ -136,11 +140,20 @@ và **câu hỏi có thể gặp**.
 > được cập nhật, và thu ngân có thể chia sẻ hoá đơn PDF.
 >
 > Đơn mang đi đi cùng luồng, chỉ khác là không có bàn và có thể thanh toán trước khi pha.
+>
+> Nhánh cuối ở làn Quản lý là **huỷ sau khi đã pha**: đơn đang preparing, ready hoặc served đều có
+> thể bị Quản lý huỷ kèm lý do. Hệ thống hỏi "Đã pha chưa?". Nếu **đã pha** — nguyên liệu thật sự đã
+> dùng — hệ thống trừ kho theo công thức, ghi lịch sử loại *điều chỉnh* với lý do huỷ. Nếu chưa pha
+> thì chỉ chuyển sang **cancelled**. Cả hai bước chạy trong một transaction.
 
 **Câu hỏi có thể gặp:**
 
 - *Sao trừ kho lúc thanh toán mà không phải lúc tạo đơn?* — BR-INV-01: đơn bị huỷ không được
-  tiêu hao kho; trừ ở lúc thanh toán nên không cần hoàn kho.
+  tiêu hao kho; trừ ở lúc thanh toán nên không cần hoàn kho. Ngoại lệ duy nhất là đơn đã pha rồi mới
+  huỷ (BR-INV-02) — khi đó trừ như hao hụt.
+- *Nhân viên pha sai định lượng thì sao?* — Không theo dõi từng ly. Quản lý kiểm kho định kỳ, phần
+  chênh lệch giữa số đếm và số trên hệ thống được ghi thành một lần điều chỉnh (BR-INV-03).
+- *Khách bỏ về sau khi đã nhận món?* — Quản lý huỷ đơn ở trạng thái served, tick "Đã pha" để trừ kho.
 - *Không có server thì đảm bảo nhất quán thế nào?* — Firestore transaction là atomic (NFR-REL-01).
 
 ---
@@ -155,9 +168,10 @@ và **câu hỏi có thể gặp**.
 > pha xong sang **ready**, thu ngân phục vụ sang **served**, xác nhận thanh toán sang **paid** —
 > kèm trừ kho và cộng điểm.
 >
-> Có hai nhánh đặc biệt. Thứ nhất, **huỷ**: thu ngân hoặc quản lý huỷ được khi đơn còn pending;
-> khi đã preparing thì chỉ quản lý được huỷ; luôn phải có lý do. Thứ hai, **gọi thêm món**: từ served
-> quay về pending để pha chế làm tiếp.
+> Có ba nhánh đặc biệt. Thứ nhất, **huỷ**: thu ngân hoặc quản lý huỷ được khi đơn còn pending;
+> từ preparing, ready hay served thì chỉ quản lý được huỷ; luôn phải có lý do. Nếu đồ đã pha thì
+> nguyên liệu bị trừ như hao hụt. Thứ hai, **gọi thêm món**: từ served quay về pending để pha chế
+> làm tiếp. Thứ ba, **đơn mang đi** có thể thanh toán ngay từ pending.
 >
 > **paid** và **cancelled** là trạng thái kết thúc, không được sửa nữa. Chỉ được thêm món khi đơn
 > đang pending hoặc served.
