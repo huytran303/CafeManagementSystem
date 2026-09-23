@@ -107,7 +107,7 @@ Open with [diagrams.net](https://app.diagrams.net) or the VS Code draw.io extens
 | `screen-flow.drawio` | SRS / SDS UI | Navigation graph of screens S01–S22 with go_router paths (brief §8) |
 | `order-state-machine.drawio` | SDS | Order status state machine (brief §4.2) |
 | `erd.drawio` | SRS §3.1.5 / SDS data | Entity relationship diagram of the Firestore model (brief §9.2, crow's foot); dashed entities are embedded arrays / maps |
-| `screen-mockups.drawio` | SRS §3.2 | Low-fidelity wireframes, one page per screen S01–S22 (brief §8); `b` / `c` pages are further states of the same screen |
+| `screen-mockups.drawio` | SRS §3.2 | Low-fidelity wireframes, one page per screen S01–S22 (brief §8); `b` / `c` / `d` pages are further states of the same screen |
 
 ## Rendering
 
