@@ -19,15 +19,15 @@ và **câu hỏi có thể gặp**.
 > **Chủ quán/Quản lý** gửi vào hệ thống các dữ liệu cấu hình: thông tin đăng nhập, tài khoản nhân viên,
 > danh mục và sản phẩm, công thức và nguyên liệu, nhập kho/điều chỉnh kho, bàn và voucher.
 > Hệ thống trả về cho quản lý các báo cáo: doanh thu, món bán chạy, doanh thu theo phương thức
-> thanh toán, lịch sử ca làm kèm bàn giao tiền, lịch sử xuất nhập kho, danh sách khách hàng và điểm, cùng cảnh báo
+> thanh toán, báo cáo bàn giao tiền theo ca (tiền đầu ca, tiền mặt, chuyển khoản, dự kiến, đếm được, chênh lệch), lịch sử xuất nhập kho, danh sách khách hàng và điểm, cùng cảnh báo
 > sắp hết hàng. Nhóm tách riêng từng báo cáo để mỗi luồng khớp với một yêu cầu FR-RPT trong SRS.
 >
-> **Thu ngân** là vai trò có nhiều luồng nhất. Thu ngân check-in/check-out ca kèm tiền đầu ca và
-> tiền mặt đếm được khi kết ca, nhập đơn mới tại bàn hoặc mang đi, thêm/sửa món, mã voucher, số điện
+> **Thu ngân** là vai trò có nhiều luồng nhất. Thu ngân nhập tiền đầu ca khi check-in, và khi
+> check-out thì nhập tiền mặt đếm được trong két cùng ghi chú bàn giao; ngoài ra thu ngân nhập đơn mới tại bàn hoặc mang đi, thêm/sửa món, mã voucher, số điện
 > thoại khách, đổi điểm, thanh toán tiền mặt — toàn bộ hoặc một phần khi thanh toán kết hợp — hoặc
 > xác nhận chuyển khoản VietQR, chuyển/gộp bàn, huỷ đơn kèm lý do, và xác nhận đơn do khách tự đặt.
 > Ngược lại, hệ thống trả về sơ đồ bàn, tổng tiền và tiền thối, mã VietQR, hoá đơn PDF, thông báo
-> món đã xong, số điểm của khách, và khi kết ca là tiền mặt dự kiến cùng số tiền chênh lệch.
+> món đã xong, số điểm của khách, và khi kết ca là bảng tổng kết ca: tiền mặt và chuyển khoản đã thu, tiền mặt dự kiến và số tiền chênh lệch.
 >
 > **Pha chế** nhận hàng đợi đơn theo thời gian thực, chi tiết từng đơn, thông báo có đơn mới và
 > cảnh báo đơn quá giờ; pha chế gửi lại cập nhật trạng thái "đang pha" và "đã xong".
