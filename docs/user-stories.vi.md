@@ -46,17 +46,26 @@ Là **thu ngân**, tôi muốn giao nước xong mới thu tiền, giống như 
 - Đơn mang đi không có bàn và đi qua `pending → preparing → ready`.
 - Giao nước cho khách → `served` → mới thanh toán. **Không có luồng trả trước.**
 
-### US-B3 — Khách tự đặt qua QR bàn (FR-CUS-05)
-- Đơn được tạo với nhãn "khách đặt", thu ngân phải xác nhận. Lưu người xác nhận và thời điểm (`confirmedBy`, `confirmedAt`).
+### US-B3 — Khách tự đặt qua QR bàn (FR-CUS-05, BR-ORD-07)
+- Đơn được tạo ở trạng thái `awaiting` với nhãn "khách đặt". Barista chưa thấy đơn, bàn chưa chuyển "Có khách".
+- Thu ngân xác nhận → đơn sang `pending`, bàn chuyển "Có khách". Lưu người xác nhận và thời điểm (`confirmedBy`, `confirmedAt`).
+- Thu ngân từ chối → đơn `cancelled`, bắt buộc có lý do.
+- Bàn đang có đơn mở → khách không đặt được, thấy "Bàn đang có đơn, vui lòng gọi nhân viên".
 
 ### US-B4 — Gọi thêm món sau khi đã phục vụ (BR-ORD-04)
 - Khi thêm món vào đơn `served` → đơn quay về `pending` để barista pha tiếp.
+- Món thêm thuộc lượt mới (`batch` + 1). Thẻ barista chỉ hiện lượt mới, các món đã phục vụ được thu gọn.
 
 ### US-B5 — Đánh dấu đã phục vụ (FR-POS-12)
 - Barista báo `ready` → thu ngân mang nước ra bàn (hoặc giao khách mang đi) và bấm "Đã phục vụ" → đơn chuyển `served`.
 
 ### US-B6 — Chỉ thanh toán khi đã phục vụ (BR-PAY-04)
-- Khi đơn đang ở `pending`, `preparing` hoặc `ready` → không mở được màn thanh toán.
+- Khi đơn đang ở `awaiting`, `pending`, `preparing` hoặc `ready` → không mở được màn thanh toán.
+
+### US-B7 — Gộp bàn để thanh toán chung (FR-POS-09, BR-ORD-08)
+- Chỉ gộp được khi cả hai đơn đều `served` và chưa đơn nào có voucher, khách thân thiết hoặc điểm đổi.
+- Món của bàn nguồn chuyển sang đơn của bàn đích, tổng tiền tính lại. Bàn nguồn trở về trống.
+- Đơn nguồn chuyển `cancelled` với lý do "Gộp vào <mã đơn đích>", không trừ kho và không tính vào số đơn huỷ trong báo cáo.
 
 ## C. Voucher & điểm thưởng
 
@@ -104,7 +113,7 @@ Là **thu ngân**, tôi muốn nhập tiền khách đưa và thấy ngay tiền
 ## E. Huỷ đơn
 
 ### US-E1 — Thu ngân huỷ đơn chưa pha (FR-POS-11)
-- Đơn `pending` → huỷ được, bắt buộc nhập lý do. Không trừ kho.
+- Đơn `awaiting` hoặc `pending` → huỷ được, bắt buộc nhập lý do. Không trừ kho.
 - Mọi lần huỷ đều lưu lý do và người huỷ (`cancelledBy`).
 
 ### US-E2 — Manager huỷ đơn đang pha hoặc đã pha (BR-ORD-05, BR-INV-02)
@@ -129,3 +138,5 @@ Là **thu ngân**, tôi muốn nhập tiền khách đưa và thấy ngay tiền
 |---|---|
 | Thu nhầm, cần hoàn tiền | Đơn `paid` bị khoá, chưa có luồng hoàn tiền |
 | Bấm "Đã nhận tiền" VietQR khi tiền chưa về | Không có gì chặn; chỉ phát hiện khi Manager đối soát sao kê |
+| Topping không trừ kho (BR-INV-04) | Chấp nhận ở v1; chênh lệch được sửa khi kiểm kho |
+| Khách ở ngoài quán đặt qua link bàn | Đơn nằm ở `awaiting`, không tới barista; thu ngân từ chối đơn lạ. Chưa giới hạn số đơn mỗi phút |

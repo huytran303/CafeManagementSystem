@@ -376,10 +376,11 @@ int calcPointsEarned({required int total, required int pointsPerVnd}) =>
 
 /// Allowed status transitions. Anything not listed is rejected.
 const allowedTransitions = <OrderStatus, Set<OrderStatus>>{
+  OrderStatus.awaiting: {OrderStatus.pending, OrderStatus.cancelled},
   OrderStatus.pending: {OrderStatus.preparing, OrderStatus.cancelled},
   OrderStatus.preparing: {OrderStatus.ready, OrderStatus.cancelled},
-  OrderStatus.ready: {OrderStatus.served},
-  OrderStatus.served: {OrderStatus.paid},
+  OrderStatus.ready: {OrderStatus.served, OrderStatus.cancelled},
+  OrderStatus.served: {OrderStatus.paid, OrderStatus.pending, OrderStatus.cancelled},
   OrderStatus.paid: {},
   OrderStatus.cancelled: {},
 };

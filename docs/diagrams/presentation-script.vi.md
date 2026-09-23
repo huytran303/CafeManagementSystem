@@ -127,16 +127,18 @@ và **câu hỏi có thể gặp**.
 > chọn món và đặt. Nếu **thu ngân đặt**: chọn bàn hoặc mang đi, rồi thêm món với size, topping,
 > số lượng và ghi chú.
 >
-> Hệ thống tạo đơn với trạng thái **pending** và cấp mã ngắn. Đơn của khách được đánh dấu để thu
-> ngân kiểm tra lại giá rồi mới xác nhận. Nếu không xác nhận thì huỷ kèm lý do — đơn chuyển sang
-> **cancelled** và không trừ kho, vì chưa pha gì cả.
+> Đơn thu ngân đặt được tạo ở trạng thái **pending** và cấp mã ngắn. Đơn của khách thì vào trạng
+> thái **awaiting**: pha chế chưa thấy, bàn chưa bị chiếm. Thu ngân kiểm tra lại giá rồi xác nhận —
+> đơn sang pending. Nếu từ chối thì huỷ kèm lý do — đơn chuyển sang **cancelled** và không trừ kho,
+> vì chưa pha gì cả. Nhờ bước này, ai cầm link bàn đặt bậy từ xa cũng không tới được quầy pha chế.
 >
 > Đơn được xác nhận sẽ vào hàng đợi của pha chế theo thứ tự cũ nhất trước. Pha chế bấm "Bắt đầu" —
 > trạng thái **preparing**. Từ đây trở đi chỉ Quản lý mới được huỷ. Pha xong bấm "Xong" — trạng thái
 > **ready** — và thu ngân được báo qua push notification, hoặc listener trong app nếu không có
 > Cloud Functions.
 >
-> Thu ngân mang món ra và đánh dấu **served**. Khách gọi thêm thì đơn quay về pending.
+> Thu ngân mang món ra và đánh dấu **served**. Khách gọi thêm thì đơn quay về pending, món thêm
+> thuộc một lượt mới và pha chế chỉ thấy lượt mới đó.
 > Không gọi thêm thì sang bước thanh toán: áp voucher, nhập số điện thoại khách thân thiết, đổi điểm.
 > Chọn tiền mặt — nhập tiền nhận và thấy tiền thối; VietQR — hiển thị QR, thu ngân xác nhận thủ công;
 > hoặc kết hợp — nhập phần chuyển khoản, QR chỉ hiện đúng số tiền đó, phần còn lại thu bằng tiền mặt.
@@ -178,12 +180,13 @@ và **câu hỏi có thể gặp**.
 
 **Lời nói:**
 
-> Đơn hàng có sáu trạng thái. Khi tạo, đơn ở **pending**. Pha chế bắt đầu thì sang **preparing**,
+> Đơn hàng có bảy trạng thái. Khách tự đặt qua QR thì đơn bắt đầu ở **awaiting**, chờ thu ngân
+> xác nhận. Thu ngân đặt thì đơn ở **pending** ngay. Pha chế bắt đầu thì sang **preparing**,
 > pha xong sang **ready**, thu ngân phục vụ — hoặc giao đơn mang đi — sang **served**, xác nhận
 > thanh toán sang **paid** — kèm trừ kho và cộng điểm. Chỉ thanh toán được từ served, kể cả đơn mang
 > đi (BR-PAY-04).
 >
-> Có hai nhánh đặc biệt. Thứ nhất, **huỷ**: thu ngân hoặc quản lý huỷ được khi đơn còn pending;
+> Có hai nhánh đặc biệt. Thứ nhất, **huỷ**: thu ngân hoặc quản lý huỷ được khi đơn còn awaiting hoặc pending;
 > từ preparing, ready hay served thì chỉ quản lý được huỷ; luôn phải có lý do. Nếu đồ đã pha thì
 > nguyên liệu bị trừ như hao hụt. Thứ hai, **gọi thêm món**: từ served quay về pending để pha chế
 > làm tiếp.
