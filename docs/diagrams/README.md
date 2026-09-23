@@ -72,6 +72,17 @@ shared include.
   `BrewBoss` adds padding so no ellipse touches the frame; `.[norank].>` only keeps both ends of an
   `<<extend>>` in the same column; `together { }` on D3 keeps related use cases next to each other.
 
+## draw.io diagrams
+
+Open with [diagrams.net](https://app.diagrams.net) or the VS Code draw.io extension.
+
+| File | Document | Scope |
+|---|---|---|
+| `context-diagram.drawio` | SRS | System context: actors and data flows around BrewBoss |
+| `order-flow.drawio` | SRS | Vertical swimlane flowchart of the order lifecycle (brief §4.1, §4.3) |
+| `screen-flow.drawio` | SRS / SDS UI | Navigation graph of screens S01–S22 with go_router paths (brief §8) |
+| `order-state-machine.drawio` | SDS | Order status state machine (brief §4.2) |
+
 ## Rendering
 
 ```bash
