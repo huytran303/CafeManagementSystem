@@ -130,7 +130,11 @@ sequenceDiagram
         APP->>DB: Create order (status = awaiting)
         DB-->>CS: Flag customer order
         CS->>APP: Confirm order
-        APP->>DB: status = pending, confirmedBy, table.currentOrderId
+        alt Table free
+            APP->>DB: status = pending, confirmedBy, table.currentOrderId
+        else Table has an open order
+            APP->>DB: add items to the open order (BR-ORD-04), QR order closed (mergedIntoId)
+        end
     else Cashier order
         CS->>APP: Select table, pick items
         APP->>DB: Create order (status = pending)
@@ -154,12 +158,13 @@ stateDiagram-v2
     [*] --> awaiting: Customer orders via QR
     [*] --> pending: Staff creates order
     awaiting --> pending: Cashier confirms (FR-CUS-05)
-    awaiting --> cancelled: Cashier rejects
+    awaiting --> cancelled: Cashier rejects, or items added to the table's open order
     pending --> preparing: Barista starts
     pending --> cancelled: Cashier/Manager cancels
     preparing --> ready: Barista finishes
     preparing --> cancelled: Manager cancels (with reason)
     ready --> served: Cashier serves
+    ready --> pending: Items added (BR-ORD-04)
     ready --> cancelled: Manager cancels (with reason)
     served --> paid: Payment confirmed
     served --> pending: Items added (BR-ORD-04)
@@ -169,8 +174,8 @@ stateDiagram-v2
 ```
 
 Rules:
-- `awaiting` orders are not on the barista queue and do not occupy the table until a cashier confirms them (BR-ORD-07).
-- Items can be added to an order only while status is `pending` or `served` (items added to a `served` order form a new batch — see BR-ORD-04).
+- `awaiting` orders are not on the barista queue and do not occupy the table until a cashier confirms them. If the table already has an open order, confirming adds the items to that order instead (BR-ORD-07).
+- Items can be added in any open status (`pending`, `preparing`, `ready`, `served`); existing lines can be edited or removed only while `pending` (BR-ORD-04).
 - Only Manager can cancel an order in `preparing`, `ready` or `served` state. The cancel dialog asks whether the drinks were already made (BR-INV-02).
 - `paid` and `cancelled` are terminal; no edits allowed.
 - Payment happens only after service (`served → paid`), for dine-in and takeaway alike. There is no pay-first flow (BR-PAY-04).
@@ -179,7 +184,7 @@ Rules:
 
 | Flow | Summary |
 |---|---|
-| Confirm customer order | Cashier opens a flagged `awaiting` order, checks it and confirms → `pending`, table becomes occupied; or rejects it with a reason → `cancelled` (BR-ORD-07) |
+| Confirm customer order | Cashier opens a flagged `awaiting` order, checks it and confirms: free table → `pending`, table becomes occupied; table with an open order → items added to that order (BR-ORD-04) and the QR order closed. Or rejects it with a reason → `cancelled` (BR-ORD-07) |
 | Merge tables | Two `served` orders on different tables → source items move to the target order, source order is closed and its table freed (BR-ORD-08) |
 | Takeaway order | Same as dine-in but `tableId = null`; the cashier marks it served when handed over, then takes payment |
 | Stock in | Manager records received ingredients and their cost → stock increases, history logged with `cost` |
@@ -257,7 +262,7 @@ Format: `FR-<MODULE>-<NN>` · Priority · Actor(s)
 | FR-POS-02 | Cashier views table map with status (empty / occupied / waiting payment) | P0 | Cashier |
 | FR-POS-03 | Cashier creates order for a table or takeaway | P0 | Cashier |
 | FR-POS-04 | Cashier adds items with size, toppings, quantity, note | P0 | Cashier |
-| FR-POS-05 | Cashier edits / removes items while order is `pending` | P0 | Cashier |
+| FR-POS-05 | Cashier edits / removes items while order is `pending`; adds items while `pending`, `preparing`, `ready` or `served` (BR-ORD-04) | P0 | Cashier |
 | FR-POS-06 | Cashier applies a voucher code; vouchers are the only discount (no manual discount) | P1 | Cashier |
 | FR-POS-07 | Cashier takes cash payment and sees change due | P0 | Cashier |
 | FR-POS-08 | Cashier shows VietQR code with exact amount and order ID in transfer note | P1 | Cashier |
@@ -277,7 +282,7 @@ Format: `FR-<MODULE>-<NN>` · Priority · Actor(s)
 | FR-BAR-03 | Barista moves order to `preparing` then `ready` | P0 | Barista |
 | FR-BAR-04 | Order card turns warning color after N minutes (configurable, default 10) | P1 | Barista |
 | FR-BAR-05 | Cashier receives push notification when an order is `ready` | P1 | System |
-| FR-BAR-06 | Sound alert on new order | P1 | Barista |
+| FR-BAR-06 | Sound alert on new order and on items added to an order in the queue | P1 | Barista |
 
 ### 5.7 Customer Ordering (`CUS`)
 
@@ -285,8 +290,8 @@ Format: `FR-<MODULE>-<NN>` · Priority · Actor(s)
 |---|---|---|---|
 | FR-CUS-01 | Each table has a printable QR code encoding its table ID | P1 | Manager |
 | FR-CUS-02 | Customer scans QR and browses menu without login (anonymous auth) | P1 | Customer |
-| FR-CUS-03 | Customer places order to that table; rejected if the table already has an open order (BR-ORD-07) | P1 | Customer |
-| FR-CUS-04 | Customer sees order status (awaiting / pending / preparing / ready) | P2 | Customer |
+| FR-CUS-03 | Customer places order to that table; if the table already has an open order, the items are sent as an add-on to that order (BR-ORD-07) | P1 | Customer |
+| FR-CUS-04 | Customer sees order status (awaiting / pending / preparing / ready); after an add-on is confirmed, the status follows the open order (`mergedIntoId`) | P2 | Customer |
 | FR-CUS-05 | Customer-created orders start as `awaiting` and reach the barista only after a cashier confirms them | P1 | Cashier |
 
 > Implementation note: customer ordering lives inside the same Flutter app as a separate route with no login (anonymous Firebase auth). A Flutter Web build of the same route is an option if customers should not need to install the app — decide in SDS.
@@ -363,6 +368,8 @@ Only the core stories are listed; add more per module in the SRS.
   **Then** status changes `pending → preparing → ready` and the card leaves my queue.
 - **Given** table T3 was served 1× "Cà phê sữa đá" and the cashier adds 1× "Trà đào"
   **Then** the card shows only "Trà đào" as the new batch; "Cà phê sữa đá" is collapsed as already served.
+- **Given** I am preparing T3's order and the cashier adds 1× "Croissant"
+  **Then** I hear a sound alert, "Croissant" is appended at the end of the same card and the status stays `preparing`.
 
 ### US-03 — Cashier takes VietQR payment (FR-POS-08)
 
@@ -399,7 +406,7 @@ Only the core stories are listed; add more per module in the SRS.
   **Then** an order is created for T5 with `source = customer`, `status = awaiting`, and the cashier sees it flagged for confirmation. It is not on the barista queue yet.
 - **Given** T5 already has an open order
   **When** I submit my cart
-  **Then** I see "Bàn đang có đơn, vui lòng gọi nhân viên" and no order is created.
+  **Then** an `awaiting` order is created and I see "Món gọi thêm đang chờ nhân viên xác nhận"; once the cashier confirms, the items join T5's open order and my status screen follows that order.
 
 ### US-06 — Manager views today's revenue (FR-RPT-01)
 
@@ -438,7 +445,7 @@ Only the core stories are listed; add more per module in the SRS.
 | S10 | Ingredient list / form / stocktake | `/manager/inventory` | Manager | INV |
 | S11 | Stock movement history | `/manager/inventory/:id` | Manager | INV |
 | S12 | Table management + QR print | `/manager/tables` | Manager | POS, CUS |
-| S13 | Table map | `/pos` | Cashier | POS |
+| S13 | Table map (area tabs + "Mang đi" tab listing open takeaway orders) | `/pos` | Cashier | POS |
 | S14 | Order editor (menu + cart) | `/pos/order/:id` | Cashier | POS |
 | S15 | Payment | `/pos/order/:id/pay` | Cashier | POS, LOY |
 | S16 | Barista queue | `/barista` | Barista | BAR |
@@ -546,7 +553,7 @@ orders/{orderId}
     unitPrice: int,      # base + size delta + toppings, snapshot
     qty: int,
     note: string,
-    batch: int           # 1 = first round; each add-on round to a served order = max + 1 (BR-ORD-04)
+    batch: int           # 1 = first round; each add-on round to a ready/served order = max + 1 (BR-ORD-04)
   }]
   subtotal: int
   discount: int          # voucher discount only (BR-DIS-03)
@@ -562,6 +569,7 @@ orders/{orderId}
   cancelledBy: string | null   # uid who cancelled (NFR-AUD-01)
   confirmedBy: string | null   # uid who confirmed a customer order (FR-CUS-05)
   confirmedAt: timestamp | null
+  mergedIntoId: string | null  # open order that received this order's items (BR-ORD-07 add-on, BR-ORD-08 merge)
   createdAt: timestamp
   updatedAt: timestamp
   paidAt: timestamp | null
@@ -703,12 +711,13 @@ Rules:
 > Stock is allowed to go negative (the drink was already made); negative stock is highlighted for the manager to correct.
 
 **Confirm customer order (BR-ORD-07)** — single `runTransaction`:
-1. Read order (must be `awaiting`) and its table; if `table.currentOrderId != null`, abort with "Bàn đang có đơn" (the cashier then rejects the order or adds the items to the open order by hand).
-2. Write: order → `pending` with `confirmedBy`, `confirmedAt`; table `currentOrderId = orderId`.
+1. Read order (must be `awaiting`), its table and, if `table.currentOrderId != null`, that open order (must not be `paid`/`cancelled`).
+2. Free table — write: order → `pending` with `confirmedBy`, `confirmedAt`; table `currentOrderId = orderId`.
+3. Table with an open order — write: open order `items +=` the QR items (same batch while `pending`/`preparing`; `batch = max + 1` and status → `pending` while `ready`/`served`, BR-ORD-04), recompute `subtotal` and `total`; QR order → `cancelled` with `cancelReason = "Gộp vào <open shortId>"`, `mergedIntoId`, `confirmedBy`, `confirmedAt`, no stock deduction.
 
 **Merge tables (BR-ORD-08)** — single `runTransaction`:
 1. Read source and target orders: both `served`, different tables, neither has `voucherCode`, `customerId` or `pointsRedeemed > 0`.
-2. Write: target `items += source items` (with the target's current max `batch`), recompute `subtotal` and `total`; source → `cancelled` with `cancelReason = "Gộp vào <target shortId>"`, `cancelledBy`, no stock deduction; source table `currentOrderId = null`.
+2. Write: target `items += source items` (with the target's current max `batch`), recompute `subtotal` and `total`; source → `cancelled` with `cancelReason = "Gộp vào <target shortId>"`, `mergedIntoId`, `cancelledBy`, no stock deduction; source table `currentOrderId = null`.
 
 **Cancellation transaction (BR-ORD-05, BR-INV-02)** — single `runTransaction`:
 1. Read order (must not be `paid`/`cancelled`); if "Đã pha" is ticked, read ingredients in recipes.
@@ -739,10 +748,10 @@ Rules:
 | BR-ORD-01 | Item unit price = product base price + size delta + sum(topping prices) |
 | BR-ORD-02 | Order total = subtotal − discount − (pointsRedeemed × vndPerPoint), minimum 0 |
 | BR-ORD-03 | A table can have at most one open order (status not `awaiting`/`paid`/`cancelled`). `awaiting` orders do not occupy the table |
-| BR-ORD-04 | Adding items to a `served` order moves it back to `pending`; the new items get `batch = max(batch) + 1` and the barista card shows only the latest batch. Items added while `pending` join the current batch |
+| BR-ORD-04 | Adding items to a `ready` or `served` order moves it back to `pending`; the new items get `batch = max(batch) + 1` and the barista card shows only the latest batch. Items added while `pending` or `preparing` join the current batch and are appended at the end of the card (status unchanged, sound alert). Existing lines can be edited or removed only while `pending` |
 | BR-ORD-05 | Cancellation requires a reason; `awaiting` and `pending` orders can be cancelled by Cashier or Manager; `preparing`, `ready` and `served` orders only by Manager, except the source order of a merge (BR-ORD-08) |
 | BR-ORD-06 | `shortId` resets daily, format `<letter><4 digits>` |
-| BR-ORD-07 | Customer QR orders are created as `awaiting` and move to `pending` only when a cashier confirms them. A QR order is rejected with "Bàn đang có đơn, vui lòng gọi nhân viên" if the table already has an open order; confirmation also fails if the table became occupied in the meantime |
+| BR-ORD-07 | Customer QR orders are created as `awaiting` and reach the barista only when a cashier confirms them. If the table has no open order at confirmation, the QR order becomes the table's order (→ `pending`). If it has one, the QR items are added to that open order under BR-ORD-04 and the QR order is closed as `cancelled` with `cancelReason = "Gộp vào <shortId>"` and `mergedIntoId`; the customer's status screen then follows the open order |
 | BR-ORD-08 | Two tables can be merged only when both orders are `served` and neither has a voucher, customer or redeemed points. The target order keeps its id and receives the source items; the source order is cancelled with reason "Gộp vào <target shortId>" without stock deduction. Cancellation counts in reports exclude this reason |
 | BR-PAY-01 | `cashAmount + qrAmount = total`, both ≥ 0. A single-method payment sets the other field to 0 |
 | BR-PAY-02 | `cashAmount` is the cash kept by the shop; change due = cash received − `cashAmount` and is not stored |
@@ -778,7 +787,7 @@ Rules:
 | categories, products | CRUD | read, toggle availability | read | read |
 | ingredients, movements | CRUD | — | — | — |
 | tables | CRUD | read, update `currentOrderId` | read | read one |
-| orders | CRUD | create, update (not `paid`) | read, update status only | create (source=customer, status=awaiting), read own |
+| orders | CRUD | create, update (not `paid`) | read, update status only | create (source=customer, status=awaiting), read own and the order its `mergedIntoId` points to |
 | customers | CRUD | read, create, update points | — | — |
 | vouchers | CRUD | read | — | — |
 | settings | CRUD | read | read | read (shop name only) |

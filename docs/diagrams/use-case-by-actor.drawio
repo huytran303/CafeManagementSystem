@@ -260,7 +260,7 @@
         <mxCell id="e1" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="UC31" target="FCM">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e2" value="«extend»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="UC31" target="UC30">
+        <mxCell id="e2" value="«include»" style="dashed=1;endArrow=open;endFill=0;endSize=10;html=1;rounded=0;fontSize=11;labelBackgroundColor=#ffffff;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="UC30" target="UC31">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>

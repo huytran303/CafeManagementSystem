@@ -48,7 +48,7 @@ và **câu hỏi có thể gặp**.
 
 ---
 
-## 2. Use Case Diagrams (`D0`–`D5_*.puml`)
+## 2. Use Case Diagrams (`use-case-diagrams.drawio`, D0–D5)
 
 **Mục đích:** cho thấy ai làm được gì. 46 use case, chia thành 6 sơ đồ vì một sơ đồ không đủ chỗ.
 
@@ -95,8 +95,8 @@ và **câu hỏi có thể gặp**.
 
 ### D4 — Pha chế & Khách đặt món (UC30–UC33)
 
-> Pha chế xử lý hàng đợi đơn; khi đơn chuyển sang "xong" thì extend sang "Thông báo món đã xong"
-> qua FCM. Khách đặt món qua QR bàn — include duyệt menu, đăng nhập ẩn danh qua Firebase Auth —
+> Pha chế xử lý hàng đợi đơn; lần nào bấm "Xong" hệ thống cũng gửi "Thông báo món đã xong" qua FCM,
+> nên đây là include chứ không phải extend. Khách đặt món qua QR bàn — include duyệt menu, đăng nhập ẩn danh qua Firebase Auth —
 > và có thể mở rộng sang theo dõi trạng thái đơn.
 
 ### D5 — Báo cáo & Khách thân thiết (UC34–UC41)
@@ -131,6 +131,8 @@ và **câu hỏi có thể gặp**.
 > thái **awaiting**: pha chế chưa thấy, bàn chưa bị chiếm. Thu ngân kiểm tra lại giá rồi xác nhận —
 > đơn sang pending. Nếu từ chối thì huỷ kèm lý do — đơn chuyển sang **cancelled** và không trừ kho,
 > vì chưa pha gì cả. Nhờ bước này, ai cầm link bàn đặt bậy từ xa cũng không tới được quầy pha chế.
+> Nếu bàn đang có đơn mở thì khách vẫn đặt được — đó là món gọi thêm. Thu ngân xác nhận thì món
+> được thêm vào đơn đang mở theo đúng quy tắc lượt gọi, còn đơn QR đóng lại với lý do "Gộp vào …".
 >
 > Đơn được xác nhận sẽ vào hàng đợi của pha chế theo thứ tự cũ nhất trước. Pha chế bấm "Bắt đầu" —
 > trạng thái **preparing**. Từ đây trở đi chỉ Quản lý mới được huỷ. Pha xong bấm "Xong" — trạng thái
@@ -138,7 +140,8 @@ và **câu hỏi có thể gặp**.
 > Cloud Functions.
 >
 > Thu ngân mang món ra và đánh dấu **served**. Khách gọi thêm thì đơn quay về pending, món thêm
-> thuộc một lượt mới và pha chế chỉ thấy lượt mới đó.
+> thuộc một lượt mới và pha chế chỉ thấy lượt mới đó. Nếu đơn còn đang pha thì món thêm nằm luôn
+> cuối thẻ đang pha, kèm âm báo.
 > Không gọi thêm thì sang bước thanh toán: áp voucher, nhập số điện thoại khách thân thiết, đổi điểm.
 > Chọn tiền mặt — nhập tiền nhận và thấy tiền thối; VietQR — hiển thị QR, thu ngân xác nhận thủ công;
 > hoặc kết hợp — nhập phần chuyển khoản, QR chỉ hiện đúng số tiền đó, phần còn lại thu bằng tiền mặt.
@@ -188,11 +191,11 @@ và **câu hỏi có thể gặp**.
 >
 > Có hai nhánh đặc biệt. Thứ nhất, **huỷ**: thu ngân hoặc quản lý huỷ được khi đơn còn awaiting hoặc pending;
 > từ preparing, ready hay served thì chỉ quản lý được huỷ; luôn phải có lý do. Nếu đồ đã pha thì
-> nguyên liệu bị trừ như hao hụt. Thứ hai, **gọi thêm món**: từ served quay về pending để pha chế
-> làm tiếp.
+> nguyên liệu bị trừ như hao hụt. Thứ hai, **gọi thêm món**: từ ready hoặc served quay về pending để
+> pha chế làm tiếp; đang pending hay preparing thì món thêm vào cùng lượt, trạng thái giữ nguyên.
 >
-> **paid** và **cancelled** là trạng thái kết thúc, không được sửa nữa. Chỉ được thêm món khi đơn
-> đang pending hoặc served.
+> **paid** và **cancelled** là trạng thái kết thúc, không được sửa nữa. Đơn đang mở thì luôn thêm
+> món được, nhưng chỉ sửa hay xoá món cũ khi đơn còn pending.
 
 ---
 
@@ -225,39 +228,99 @@ và **câu hỏi có thể gặp**.
 
 ## 6. ERD (`erd.drawio`)
 
-**Mục đích:** mô hình dữ liệu Firestore, ký hiệu chân chim (crow's foot).
+**Mục đích:** mô hình dữ liệu Firestore: có những thực thể nào, mỗi thực thể lưu gì, và chúng nối
+với nhau ra sao. Ký hiệu chân chim (crow's foot).
 
-**Lời nói:**
+### 6.1 Cách đọc sơ đồ (nói trước khi đi vào nội dung, khoảng 30 giây)
 
-> Hệ thống dùng Firestore nên có hai loại thực thể: **collection** — viền liền — và **dữ liệu nhúng**
-> trong document — viền đứt. Khoá chính là document id, không lưu thành field.
+> Mỗi hộp là một thực thể. Dòng đầu là tên, dòng thứ hai là đường dẫn Firestore, ví dụ
+> `orders/{orderId}`. **PK** là document id — nó là tên của document chứ không phải một field bên
+> trong. **FK** là field chứa id của document ở collection khác. Firestore không có khoá ngoại
+> thật, nên FK ở đây là quy ước của ứng dụng, được kiểm tra trong code và security rules.
 >
-> Trung tâm là **ORDER**. Một đơn chứa một hoặc nhiều **ORDER_ITEM** nhúng bên trong. Đơn do một
-> **USER** tạo, có thể được một **USER** xác nhận (đơn khách tự đặt, `confirmedBy`), thu tiền
-> (`paidBy`) hoặc huỷ (`cancelledBy`) — mỗi khoá ngoại là một quan hệ riêng, để biết ai làm gì
-> (NFR-AUD-01); thuộc về tối đa một
-> **TABLE** — mang đi thì không có bàn; có thể gắn tối đa một **CUSTOMER** thân thiết và tối đa một
-> **VOUCHER**. Tiền của đơn lưu thành hai field `cashAmount` và `qrAmount` thay cho một field phương
-> thức thanh toán, nên một đơn có thể trả bằng cả hai cách.
+> Hộp **viền liền** là collection thật. Hộp **viền đứt** là dữ liệu **nhúng**: một mảng hoặc map
+> nằm bên trong document cha, không có collection riêng.
 >
-> Phía menu: một **CATEGORY** chứa nhiều **PRODUCT**. Mỗi sản phẩm nhúng danh sách **size**,
-> **topping** và **công thức theo size** — mỗi dòng công thức trỏ tới một **INGREDIENT**. Mỗi món
-> trong đơn tham chiếu tới một sản phẩm.
+> Ký hiệu ở đầu đường nối cho biết số lượng:
 >
-> Phía kho: mỗi **INGREDIENT** có nhiều **STOCK_MOVEMENT** — là subcollection — do một user ghi,
-> và nếu là xuất kho do bán hàng thì liên kết với đơn gây ra nó. Lần nhập kho lưu thêm giá nhập
-> (`cost`) để tính chi phí.
->
-> Ngoài ra **USER** có nhiều **SHIFT**; mỗi ca của thu ngân lưu thêm tiền đầu ca, tiền đếm được khi
-> kết ca, tiền mặt dự kiến, chênh lệch và ghi chú bàn giao. **SHOP_SETTINGS** là một document duy nhất chứa thông tin
-> cửa hàng, gồm cả tài khoản ngân hàng dùng cho VietQR.
+> | Ký hiệu | Nghĩa |
+> |---|---|
+> | `‖` hai gạch | đúng một, bắt buộc |
+> | `o‖` vòng + gạch | không hoặc một, tuỳ chọn (FK có thể null) |
+> | `o<` vòng + chân chim | không hoặc nhiều |
+> | `‖<` gạch + chân chim | một hoặc nhiều, ít nhất một |
 
-**Câu hỏi có thể gặp:**
+### 6.2 Lời nói: đi theo một đơn hàng
 
-- *Sao nhúng order items thay vì tách collection?* — Đơn luôn được đọc/ghi cùng các món, nhúng giúp
-  một lần đọc và nằm gọn trong một transaction.
-- *Sao lưu `expectedCash` mà không tính lại khi xem?* — Đó là ảnh chụp lúc kết ca: sau này có sửa đơn
-  thì biên bản bàn giao vẫn giữ nguyên số đã đối chiếu.
+Đừng đọc từng hộp từ trái sang phải. Hãy kể câu chuyện của **một đơn hàng**, đi qua thực thể nào
+thì chỉ vào thực thể đó.
+
+> **Bước 1 — Nhân viên vào ca.** Thu ngân đăng nhập bằng tài khoản **USER** (`users/{uid}`,
+> `role` = manager / cashier / barista). Họ check-in, tạo một **SHIFT**: một user có nhiều ca
+> (`USER ‖—o< SHIFT`). Ca của thu ngân lưu tiền đầu ca; khi kết ca lưu thêm tiền đếm được,
+> tiền dự kiến `expectedCash`, chênh lệch `cashDiff` và ghi chú bàn giao.
+>
+> **Bước 2 — Khách gọi món.** Khách ngồi bàn T3 gọi hai ly cà phê sữa size M thêm trân châu. Thu
+> ngân tạo một **ORDER**. Đơn thuộc về tối đa một **TABLE** (`tableId`; mang đi thì null, vì thế
+> đầu TABLE là `o‖`). Ngược lại, bàn giữ `currentOrderId` trỏ tới đơn đang mở (đường
+> "current order", hai đầu đều `o‖`): sơ đồ bàn chỉ cần đọc bàn là biết bàn nào đang có khách. Mỗi dòng món là một **ORDER_ITEM** nhúng trong mảng `items[]` của đơn; một
+> đơn có ít nhất một món (`ORDER ‖—‖< ORDER_ITEM`).
+>
+> Mỗi ORDER_ITEM trỏ tới một **PRODUCT** bằng `productId`, nhưng vẫn **chép lại** tên và đơn giá
+> lúc gọi (snapshot). Nếu sau này quản lý đổi giá hay đổi tên món, hoá đơn cũ không bị thay đổi.
+> `batch` đánh số lượt gọi: gọi thêm sau khi đã pha xong thì là batch 2, để pha chế biết phải làm
+> phần nào.
+>
+> **Bước 3 — Menu ở đâu ra.** **CATEGORY** chứa nhiều PRODUCT. Mỗi PRODUCT nhúng ba thứ: danh sách
+> **PRODUCT_SIZE** (S/M/L và giá cộng thêm), **TOPPING**, và **RECIPE_ITEM**, tức công thức theo
+> từng size: size M cần 18 g cà phê, 30 ml sữa đặc... Mỗi dòng công thức trỏ tới một
+> **INGREDIENT**. Đây là cầu nối giữa bán hàng và kho.
+>
+> **Bước 4 — Thanh toán.** Đơn phục vụ xong thì thu ngân thu tiền. Đơn có thể gắn một khách thân
+> thiết **CUSTOMER** (id chính là số điện thoại đã chuẩn hoá) và một **VOUCHER** (id chính là mã
+> voucher). Cả hai đều tuỳ chọn, nên đầu phía CUSTOMER / VOUCHER là `o‖`.
+>
+> Tiền lưu thành hai field `cashAmount` và `qrAmount`, không có field "phương thức thanh toán".
+> Trả tiền mặt thì `qrAmount = 0`; chuyển khoản thì `cashAmount = 0`; trả kết hợp thì có cả hai.
+> Báo cáo chỉ việc cộng từng field.
+>
+> **Bước 5 — Trừ kho.** Ngay trong transaction thanh toán, hệ thống đọc công thức của từng món, trừ
+> `stock` của INGREDIENT và ghi một **STOCK_MOVEMENT** loại `sale` có `orderId` trỏ về đơn
+> (đường "causes (sale / waste)"; huỷ đơn đã pha cũng ghi `orderId` cho dòng hao hụt).
+> STOCK_MOVEMENT là **subcollection** nằm dưới nguyên liệu (`ingredients/{id}/movements`): mỗi
+> nguyên liệu có lịch sử nhập xuất riêng. Ngoài `sale` còn có `in` (nhập hàng, lưu giá nhập `cost`)
+> và `adjust` (kiểm kho, hao hụt khi huỷ đơn đã pha).
+>
+> **Bước 6 — Ai làm gì.** Đơn có bốn đường nối về USER, mỗi đường ứng với một hành động:
+> `createdBy` (tạo; đơn khách tự đặt qua QR thì là `"anonymous"`, nên đầu USER là `o‖`), `confirmedBy` (xác nhận đơn khách tự đặt), `paidBy` (thu tiền), `cancelledBy`
+> (huỷ). Tách riêng từng người để truy vết được (NFR-AUD-01), và `paidBy` là cơ sở để tính tiền
+> mặt dự kiến khi thu ngân kết ca. STOCK_MOVEMENT cũng lưu `byUserId`.
+>
+> **Cuối cùng**, **SHOP_SETTINGS** đứng riêng: một document duy nhất `settings/shop` chứa tên quán,
+> tài khoản ngân hàng cho VietQR và các tham số như số phút coi là đơn trễ, tỉ lệ quy đổi điểm.
+
+### 6.3 Ba quyết định thiết kế nên nhấn mạnh
+
+1. **Nhúng thay vì tách collection** (ORDER_ITEM, size, topping, công thức): dữ liệu luôn được đọc
+   cùng document cha, nên một lần đọc là đủ và vẫn nằm gọn trong một transaction.
+2. **Snapshot** (tên và giá trong ORDER_ITEM, `expectedCash` trong SHIFT): số liệu lịch sử không
+   đổi khi dữ liệu gốc đổi.
+3. **Tiền là `int` VND**: không dùng số thực, nên không có lỗi làm tròn.
+
+### 6.4 Câu hỏi có thể gặp
+
+- *Sao nhúng order items mà không tách thành collection?* — Đơn luôn được đọc và ghi cùng các món.
+  Nhúng giúp chỉ cần một lần đọc và nằm gọn trong một transaction. Giới hạn 1 MB mỗi document là
+  quá đủ cho một đơn cà phê.
+- *Firestore là NoSQL, sao vẫn vẽ ERD?* — Quan hệ vẫn tồn tại ở mức nghiệp vụ. ERD cho thấy field
+  nào là id tham chiếu và phần nào được nhúng; đó chính là quyết định thiết kế quan trọng nhất
+  khi dùng Firestore.
+- *Sao lưu `expectedCash` mà không tính lại khi xem?* — Đó là ảnh chụp tại lúc kết ca. Sau này có
+  sửa đơn thì biên bản bàn giao vẫn giữ đúng con số đã đối chiếu.
+- *Sao id của CUSTOMER là số điện thoại?* — Để tra khách theo số điện thoại chỉ bằng một lần đọc
+  document, và không thể tạo trùng hai khách cùng một số.
+- *Xoá sản phẩm thì đơn cũ có sao không?* — Không. Đơn cũ đã chép tên và giá, nên vẫn hiển thị
+  đúng; `productId` chỉ còn là tham chiếu lịch sử.
 
 ---
 

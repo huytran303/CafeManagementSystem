@@ -50,11 +50,12 @@ Là **thu ngân**, tôi muốn giao nước xong mới thu tiền, giống như 
 - Đơn được tạo ở trạng thái `awaiting` với nhãn "khách đặt". Barista chưa thấy đơn, bàn chưa chuyển "Có khách".
 - Thu ngân xác nhận → đơn sang `pending`, bàn chuyển "Có khách". Lưu người xác nhận và thời điểm (`confirmedBy`, `confirmedAt`).
 - Thu ngân từ chối → đơn `cancelled`, bắt buộc có lý do.
-- Bàn đang có đơn mở → khách không đặt được, thấy "Bàn đang có đơn, vui lòng gọi nhân viên".
+- Bàn đang có đơn mở → khách vẫn đặt được, món được gửi dạng "gọi thêm". Thu ngân xác nhận thì món được thêm vào đơn đang mở theo BR-ORD-04, đơn QR đóng lại (`mergedIntoId`); màn trạng thái của khách chuyển sang theo đơn đang mở.
 
-### US-B4 — Gọi thêm món sau khi đã phục vụ (BR-ORD-04)
-- Khi thêm món vào đơn `served` → đơn quay về `pending` để barista pha tiếp.
-- Món thêm thuộc lượt mới (`batch` + 1). Thẻ barista chỉ hiện lượt mới, các món đã phục vụ được thu gọn.
+### US-B4 — Gọi thêm món (BR-ORD-04)
+- Đơn đang `pending` hoặc `preparing`: món thêm vào cùng lượt, nằm cuối thẻ barista, có âm báo; trạng thái giữ nguyên.
+- Đơn đang `ready` hoặc `served`: món thêm thuộc lượt mới (`batch` + 1), đơn quay về `pending`. Thẻ barista chỉ hiện lượt mới, các món đã làm được thu gọn.
+- Chỉ sửa / xoá món cũ khi đơn còn `pending`.
 
 ### US-B5 — Đánh dấu đã phục vụ (FR-POS-12)
 - Barista báo `ready` → thu ngân mang nước ra bàn (hoặc giao khách mang đi) và bấm "Đã phục vụ" → đơn chuyển `served`.
