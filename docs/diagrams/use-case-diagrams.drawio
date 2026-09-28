@@ -442,13 +442,7 @@
         <mxCell id="e6" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CAS" target="UC27">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e7" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CAS" target="UC24">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="e8" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CAS" target="UC25">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e9" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CAS" target="UC28">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e10" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="MGR" target="UC18">
@@ -552,13 +546,13 @@
           <mxGeometry x="320" y="60" width="530" height="805" as="geometry" />
         </mxCell>
         <mxCell id="UC38" value="UC38&lt;br&gt;Attach loyalty customer" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="360" y="110" width="190" height="60" as="geometry" />
+          <mxGeometry x="620" y="110" width="190" height="60" as="geometry" />
         </mxCell>
         <mxCell id="UC39" value="UC39&lt;br&gt;Redeem points" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="360" y="195" width="190" height="60" as="geometry" />
+          <mxGeometry x="620" y="195" width="190" height="60" as="geometry" />
         </mxCell>
         <mxCell id="UC25" value="UC25&lt;br&gt;Take payment&lt;br&gt;(see D3)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="620" y="152" width="190" height="60" as="geometry" />
+          <mxGeometry x="360" y="152" width="190" height="60" as="geometry" />
         </mxCell>
         <mxCell id="UC34" value="UC34&lt;br&gt;View revenue dashboard" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="360" y="365" width="190" height="60" as="geometry" />
@@ -587,10 +581,7 @@
         <mxCell id="MGR" value="Manager" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#ffffff;" vertex="1" parent="1">
           <mxGeometry x="190" y="578" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="e0" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CAS" target="UC38">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e1" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CAS" target="UC39">
+        <mxCell id="e0" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CAS" target="UC25">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e2" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="MGR" target="UC34">

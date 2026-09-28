@@ -29,7 +29,8 @@ actor starts plus the use cases those reach through `<<include>>` / `<<extend>>`
 | A5 | Manager | UC04, UC06–UC08, UC11–UC14, UC17–UC18, UC29, UC34–UC37, UC40–UC42, UC45 |
 
 On A2 the payment extensions (UC24, UC28, UC38, UC39, UC46) hang off UC25 only, without a direct
-Cashier line, so no dashed arrow crosses an actor association. A5 lists only Manager-only use
+Cashier line, so no dashed arrow crosses an actor association. D3 and D5 follow the same rule: the Cashier
+connects to UC25, and its payment extensions reach it only through `<<extend>>`. A5 lists only Manager-only use
 cases; the Cashier and Barista permissions the Manager also holds (brief §2) are on A2 / A3.
 UC44 sits on A1 because UC05 includes it; A2 repeats UC05 and UC44 with `(see A1)` since cash
 handover matters for the Cashier (and Manager) only; a Barista shift has no cash fields (BR-STAFF-03).
