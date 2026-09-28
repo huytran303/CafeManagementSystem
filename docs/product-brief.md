@@ -2,7 +2,7 @@
 
 > Working name: **BrewBoss** (placeholder, rename freely)
 > Platform: Flutter mobile (Android + iOS), tablet-friendly
-> Team: 5 members
+> Team: 4 members
 > Status: Draft v0.1 — 2026-09-23
 >
 > This document is the single source for the upcoming **SRS** (Software Requirements Specification) and **SDS** (Software Design Specification).
@@ -808,11 +808,12 @@ Each member owns a vertical slice (UI → state → repository → rules → tes
 
 | Member | Modules | Screens | Also owns |
 |---|---|---|---|
-| **M1** | AUTH, STAFF | S01–S07, S22 | Project setup, `core/` (router, theme, shared widgets), CI, Firebase project |
-| **M2** | MENU, INV | S08–S11 | `models/` freezed setup, image upload |
-| **M3** | POS | S12–S15 | Payment transaction, VietQR |
-| **M4** | BAR, CUS | S16–S18 | FCM + Cloud Functions, table QR |
-| **M5** | RPT, LOY | S04, S19–S21 | Security Rules + emulator tests, seed data script |
+| **M1** — Trần Ngọc Huy (leader) | AUTH, STAFF | S01–S03, S05–S07, S22 | Project setup, `core/` (router, theme, shared widgets), CI, Firebase project |
+| **M2** — Phạm Khắc Nghĩa | POS | S13–S15 | Order domain, payment transaction, VietQR, split payment |
+| **M3** — Nguyễn Bá Cường | BAR, CUS, tables, RPT, LOY | S04, S12, S16–S21 | FCM + Cloud Functions, table QR, Security Rules + emulator tests, seed data script |
+| **M4** — Lại Hữu Quang Anh (HE190282) | MENU, INV | S08–S11 | `models/` freezed setup, image upload, stock deduction helper |
+
+Task-level split: `docs/BrewBoss_Task_Assignment.docx`.
 
 Shared agreements (week 1):
 - One state management approach (Riverpod), one code style (`flutter analyze` + `dart format`).
@@ -850,7 +851,7 @@ Weekly: 1 sync meeting + async daily updates. Demo the current `main` build at e
 | Unit | Price calculation, discount, points, status transitions, split payment, expected cash (BR-*) | `flutter_test` | Module owner |
 | Repository | Firestore reads/writes | `fake_cloud_firestore` | Module owner |
 | Widget | Key screens render and react to state | `flutter_test` | Module owner |
-| Security Rules | Each role's allowed/denied operations | Firebase Emulator + `@firebase/rules-unit-testing` | M5 |
+| Security Rules | Each role's allowed/denied operations | Firebase Emulator + `@firebase/rules-unit-testing` | M3 |
 | Manual E2E | Full demo script on 3 devices (cashier, barista, manager) | Checklist | All |
 
 Minimum bar: every business rule in §11 has at least one unit test.
@@ -862,7 +863,7 @@ Minimum bar: every business rule in §11 has at least one unit test.
 | Risk | Impact | Mitigation |
 |---|---|---|
 | Data model changes mid-project | High — breaks multiple modules | Freeze model in week 1; changes need team agreement |
-| Merge conflicts in shared files | Medium | Feature-first folders; M1 owns `core/`, M2 owns `models/` |
+| Merge conflicts in shared files | Medium | Feature-first folders; M1 owns `core/`, M4 owns `models/` |
 | Scope creep | High | P2 items only after M3 milestone is met |
 | Firebase Blaze billing not possible | Medium — no Cloud Functions / push | Fallback to in-app listeners for alerts |
 | Uneven skill levels | Medium | Pair programming in weeks 1–2; shared example feature by M1 |
@@ -885,7 +886,7 @@ Minimum bar: every business rule in §11 has at least one unit test.
 | # | Question | Affects |
 |---|---|---|
 | Q1 | Does the course require a custom backend (Spring Boot / Node) instead of Firebase? | Architecture §10, whole SDS |
-| Q2 | Is customer ordering in scope, and should it be Flutter Web (no install) or in-app? | CUS module, M4 workload |
+| Q2 | Is customer ordering in scope, and should it be Flutter Web (no install) or in-app? | CUS module, M3 workload |
 | Q3 | Required SRS/SDS templates (IEEE, school template)? | Doc structure |
 | Q4 | Can the team enable Firebase Blaze plan? | Push notifications |
 | Q5 | Real deadline and number of sprints? | Timeline §14 |

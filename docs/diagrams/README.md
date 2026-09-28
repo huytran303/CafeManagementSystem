@@ -104,3 +104,4 @@ Open with [diagrams.net](https://app.diagrams.net) or the VS Code draw.io extens
 | `order-state-machine.drawio` | SRS §2.1.1 / SDS | Order status state machine (brief §4.2) |
 | `erd.drawio` | SRS §3.1.5 / SDS data | Entity relationship diagram of the Firestore model (brief §9.2, crow's foot); dashed entities are embedded arrays / maps |
 | `screen-mockups.drawio` | SRS §3.2 | Low-fidelity wireframes, one page per screen S01–S22 (brief §8); lettered pages (`b` … `h`) are further states of the same screen, e.g. S13b takeaway tab, S14e–S14g order editor per status, S14h customer add-on confirmation |
+| `sds-diagrams.drawio` | SDS §2–4 | Architecture overview, layered architecture, package, deployment, domain class diagram, one class diagram per module (AUTH … LOY) and sequence diagrams SD-01–SD-13 |
